@@ -1,6 +1,7 @@
 from itertools import count
 
 
+
 from Curso import Curso as Cursos
 from Estudiante import Estudiante as Estudiantes
 from Methods import Methods

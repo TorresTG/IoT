@@ -1,6 +1,7 @@
 
 class Methods:
 
+
     def __init__(self, *args):
         if all(arg is None for arg in args):
             self.__lista_Cursos = []
