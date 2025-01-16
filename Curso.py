@@ -16,6 +16,7 @@ class Curso(Methods):
         self.__salon = salon
         self.__descripcion = descripcion
 
+
     @property
     def nombre(self):
         return self.__nombre
