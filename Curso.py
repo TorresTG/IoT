@@ -1,25 +1,20 @@
 from symtable import Class
+from Methods import Methods
 ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
 
 
-class Curso:
+class Curso(Methods):
 
     def __init__(self, nombre = None, grado= None, seccion=None, salon=None, descripcion=None):
-        if all(arg is None for arg in [nombre, grado, seccion, salon, descripcion]):
-            self.__mc = []
-        else:
-            self.__nombre = nombre
-            self.__grado = grado
-            self.__seccion = seccion
-            self.__salon = salon
-            self.__descripcion = descripcion
-
-
-    def __str__(self):
-        return f"{self.__nombre}\n{self.__grado}\n{self.__seccion}\n{self.__salon}\n{self.__descripcion}"
+        super().__init__()
+        self.__nombre = nombre
+        self.__grado = grado
+        self.__seccion = seccion
+        self.__salon = salon
+        self.__descripcion = descripcion
 
     @property
     def nombre(self):
@@ -56,35 +51,8 @@ class Curso:
     def set_descripcion(self, value):
         self.__descripcion = value
 
-# ----------------------------------------- parte nueva -------
-
-    def agregar_a_ListaCursos(self, curso):
-        self.__mc.append(curso)
-
-    def eliminar_a_ListaCursos(self, index):
-        if 0 <= index < len(self.__mc):
-            del self.__mc[index]
-        else:
-            print(f"No existe el valor en la posicion: {index}")
-
-    def editar_a_ListaCursos(self, index, nuevo_curso):
-        if 0 <= index < len(self.__mc):
-            self.__mc[index] = nuevo_curso
-        else:
-            print(f"No existe el valor en la posicion: {index}")
-
-    def mostrar_ListaCursos(self):
-        for x in self.__mc:
-            print(x)
-            print("--------")
-
-
-
-
 if __name__ =="__main__":
-
-
-    varios_cursos = Curso()
+    ClaseCurso = Curso()
     x = Curso("matematicas", 5,
               "A", "salon 17", "se enseñan formulas basicas")
 
@@ -95,15 +63,15 @@ if __name__ =="__main__":
               "A", "salon 4", "se estudia el lenguaje")
 
     print(f"{VERDE}----POST AGREGAR CURSOS----{RESET}")
-    varios_cursos.agregar_a_ListaCursos(x)
-    varios_cursos.agregar_a_ListaCursos(y)
-    varios_cursos.agregar_a_ListaCursos(z)
-    varios_cursos.mostrar_ListaCursos()
+    ClaseCurso.agregar_a_Lista(x)
+    ClaseCurso.agregar_a_Lista(y)
+    ClaseCurso.agregar_a_Lista(z)
+    ClaseCurso.mostrar_Lista()
     print("")
 
     print(f"{ROJO}----POST ELIMINAR CURSOS----{RESET}")
-    varios_cursos.eliminar_a_ListaCursos(1)
-    varios_cursos.mostrar_ListaCursos()
+    ClaseCurso.eliminar_a_Lista(1)
+    ClaseCurso.mostrar_Lista()
     print("")
 
     print(f"{AMARILLO}----POST EDITAR CURSOS----{RESET}")
@@ -112,9 +80,9 @@ if __name__ =="__main__":
     b = Curso("poesia", 2, "D",
               "salon 3", "se estudia la voz a traves de las palabras")
 
-    varios_cursos.editar_a_ListaCursos(0, a)
-    varios_cursos.editar_a_ListaCursos(1, b)
-    varios_cursos.mostrar_ListaCursos()
+    ClaseCurso.editar_a_Lista(0, a)
+    ClaseCurso.editar_a_Lista(1, b)
+    ClaseCurso.mostrar_Lista()
 
 
 

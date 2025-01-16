@@ -1,13 +1,18 @@
-class Estudiante:
-    def __init__(self, nombre, edad, telefono, email, estado):
+from Methods import Methods
+ROJO = "\033[31m"
+VERDE = "\033[32m"
+AMARILLO = "\033[33m"
+RESET = "\033[0m"
+
+
+class Estudiante(Methods):
+    def __init__(self, nombre = None, edad = None, telefono = None, email = None, estado = None):
+        super().__init__()
         self.__nombre = nombre
         self.__edad = edad
         self.__telefono = telefono
         self.__email = email
         self.__estado = estado
-
-    def __str__(self):
-        return f"{self._nombre}\n{self.edad}\n{self.telefono}\n{self.email}\n{self._estado}"
 
     def mostrar(self):
         print(self.__nombre)
@@ -41,8 +46,27 @@ class Estudiante:
 
 
 if __name__ == "__main__":
-    estudiansin = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
-    print(estudiansin)
-    print("---")
-    estudiansin.set_edad(126)
-    print(estudiansin)
+    ClaseEstudiante = Estudiante()
+    x = Estudiante("Matias", 2,
+              "8716764502", "tobias@gmail.com", "Vivo")
+
+    y = Estudiante("noa", 19,
+              "8716608698", "23170106@uttcampus.com", "Muerto")
+
+    print(f"{VERDE}----POST AGREGAR ESTUDIANTE----{RESET}")
+    ClaseEstudiante.agregar_a_Lista(x)
+    ClaseEstudiante.agregar_a_Lista(y)
+    ClaseEstudiante.mostrar_Lista()
+    print("")
+
+    print(f"{ROJO}----POST ELIMINAR ESTUDIANTE----{RESET}")
+    ClaseEstudiante.eliminar_a_Lista(1)
+    ClaseEstudiante.mostrar_Lista()
+    print("")
+
+    print(f"{AMARILLO}----POST EDITAR ESTUDIANTE----{RESET}")
+    a = Estudiante("Matias", 3,
+              "8716764502", "tobias@gmail.com", "Muelto")
+
+    ClaseEstudiante.editar_a_Lista(0, a)
+    ClaseEstudiante.mostrar_Lista()
