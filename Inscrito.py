@@ -1,5 +1,8 @@
 from itertools import count
-
+ROJO = "\033[31m"
+VERDE = "\033[32m"
+AMARILLO = "\033[33m"
+RESET = "\033[0m"
 
 
 from Curso import Curso as Cursos
@@ -55,15 +58,37 @@ if __name__ == "__main__":
     xa = Estudiantes("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
     xb = Estudiantes("juan", 7, "871677777", "saul@gmail.com", "vivo")
     xc = Estudiantes("dante", 9, "8714563345", "dante@gmail.com", "muerto")
-    inscripcion = Inscrito(x, [])
-    inscripcion.agregar_estudiante_inscrito_lista(xa)
-    inscripcion.agregar_estudiante_inscrito_lista(xb)
-    inscripcion.agregar_estudiante_inscrito_lista(xc)
+    ClaseIncrito = Inscrito(x, [])
+    ClaseIncrito.agregar_estudiante_inscrito_lista(xa)
+    ClaseIncrito.agregar_estudiante_inscrito_lista(xb)
+    ClaseIncrito.agregar_estudiante_inscrito_lista(xc)
+    ClaseIncrito.mostrar_inscrito_lista()
+    ClaseIncrito = Inscrito(x, [])
 
     y = Cursos("español", 5, "A", "salon 14", "se enseña español ")
-    yd = Estudiantes("Pepo", 7, "871674998", "pepe123@gmail.com", "vivo")
-    inscripcion.editar_estudiante_inscrito_lista(0, yd)
-    inscripcion.eliminar_estudiante_inscrito_lista(1)
-    inscripcion.mostrar_inscrito_lista()
+    ya = Estudiantes("Pepo", 7, "871674998", "pepe123@gmail.com", "vivo")
+    ClaseIncrito = Inscrito(y, [])
+    ClaseIncrito.agregar_estudiante_inscrito_lista(ya)
 
+    ClaseIncrito = Inscrito(x, [])
+
+    print(f"{VERDE}----POST AGREGAR ESTUDIANTE----{RESET}")
+    ClaseIncrito.agregar_a_Lista(x)
+    ClaseIncrito.agregar_a_Lista(y)
+    ClaseIncrito.mostrar_inscrito_lista()
+    print("")
+
+    print(f"{ROJO}----POST ELIMINAR ESTUDIANTE----{RESET}")
+    ClaseIncrito.eliminar_a_Lista(0)
+    ClaseIncrito.mostrar_inscrito_lista()
+    print("")
+
+    print(f"{AMARILLO}----POST EDITAR ESTUDIANTE----{RESET}")
+    y = Cursos("Poesia", 1, "B", "salon 8", "se canta en versos")
+    ya = Estudiantes("samu", 80, "8710000000", "samugod@gmail.com", "vivo por ahora")
+    ClaseIncrito.agregar_estudiante_inscrito_lista(ya)
+    a = Inscrito(y, [])
+
+    ClaseIncrito.editar_a_Lista(0, y)
+    ClaseIncrito.mostrar_inscrito_lista()
 
