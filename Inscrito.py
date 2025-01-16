@@ -78,6 +78,7 @@ if __name__ == "__main__":
     ClaseIncrito.mostrar_inscrito_lista()
     print("")
 
+
     print(f"{ROJO}----POST ELIMINAR ESTUDIANTE----{RESET}")
     ClaseIncrito.eliminar_a_Lista(0)
     ClaseIncrito.mostrar_inscrito_lista()
