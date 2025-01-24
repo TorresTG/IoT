@@ -9,12 +9,14 @@ RESET = "\033[0m"
 
 class Estudiante(Methods):
     def __init__(self, nombre = None, edad = None, telefono = None, email = None, estado = None):
-        super().__init__()
-        self.__nombre = nombre
-        self.__edad = edad
-        self.__telefono = telefono
-        self.__email = email
-        self.__estado = estado
+        if (nombre or edad or telefono or email or estado) is None:
+            super().__init__()
+        else:
+            self.__nombre = nombre
+            self.__edad = edad
+            self.__telefono = telefono
+            self.__email = email
+            self.__estado = estado
 
     def mostrar(self):
         print(self.__nombre)
@@ -67,8 +69,8 @@ if __name__ == "__main__":
     print("")
 
     print(f"{AMARILLO}----POST EDITAR ESTUDIANTE----{RESET}")
-    a = Estudiante("Matias", 3,
-              "8716764502", "tobias@gmail.com", "Muelto")
+    a = Estudiante("Eduardo", -5,
+              "8716764502", "eduardo@gmail.com", "Muelto")
 
     ClaseEstudiante.editar_a_Lista(0, a)
     ClaseEstudiante.mostrar_Lista()

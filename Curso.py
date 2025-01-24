@@ -11,12 +11,14 @@ RESET = "\033[0m"
 class Curso(Methods):
 
     def __init__(self, nombre = None, grado= None, seccion=None, salon=None, descripcion=None):
-        super().__init__()
-        self.__nombre = nombre
-        self.__grado = grado
-        self.__seccion = seccion
-        self.__salon = salon
-        self.__descripcion = descripcion
+        if (nombre or grado or seccion or salon or descripcion) is None:
+            super().__init__()
+        else:
+            self.__nombre = nombre
+            self.__grado = grado
+            self.__seccion = seccion
+            self.__salon = salon
+            self.__descripcion = descripcion
 
 
     @property
