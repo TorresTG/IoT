@@ -1,9 +1,8 @@
 
 class Methods:
 
-    def __init__(self, *args):
-        if all(arg is None for arg in args):
-            self.__lista_Cursos = []
+    def __init__(self):
+        self.__lista_clases = []
 
     def __str__(self):
         return "\n".join(
@@ -12,21 +11,21 @@ class Methods:
         )
 
     def agregar_a_Lista(self, clase):
-        self.__lista_Cursos.append(clase)
+        self.__lista_clases.append(clase)
 
     def eliminar_a_Lista(self, index):
-        if 0 <= index < len(self.__lista_Cursos):
-            del self.__lista_Cursos[index]
+        if 0 <= index < len(self.__lista_clases):
+            del self.__lista_clases[index]
         else:
             print(f"No existe el valor en la posicion: {index}")
 
     def editar_a_Lista(self, index, nueva_clase):
-        if 0 <= index < len(self.__lista_Cursos):
-            self.__lista_Cursos[index] = nueva_clase
+        if 0 <= index < len(self.__lista_clases):
+            self.__lista_clases[index] = nueva_clase
         else:
             print(f"No existe el valor en la posicion: {index}")
 
     def mostrar_Lista(self):
-        for x in self.__lista_Cursos:
+        for x in self.__lista_clases:
             print(x)
             print("--------")

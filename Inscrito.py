@@ -7,14 +7,25 @@ from Estudiante import Estudiante as Estudiantes
 from Methods import Methods
 
 
-class Inscrito(Cursos, Estudiantes, Methods):
+class Inscrito(Methods):
 
-    def __init__(self, cursos: Cursos, estudiantes: []):
-        if Cursos is None:
+    def __init__(self, cursos = None, estudiantes = None):
+        if (cursos or estudiantes) is None:
             super().__init__()
+            print("se heredo")
+        elif estudiantes is not None and cursos is None:
+            self.__curso = None
+            self.__estudiantes = estudiantes
+            print("obtuvo el estudiante")
+        elif estudiantes is None and cursos is not None:
+            self.__curso = cursos
+            self.__estudiantes = None
+            print("obtuvo el curso")
         else:
             self.__curso = cursos
             self.__estudiantes = estudiantes
+            print("ambos")
+
 
 
     def insc_agregar(self, estu: Estudiantes):
@@ -49,34 +60,28 @@ class Inscrito(Cursos, Estudiantes, Methods):
 
 
 
+
 if __name__ == "__main__":
-    superInscri = Inscrito(None,[])
+    superInscri = Inscrito(None,None)
     x = Cursos("matematicas", 5, "A", "salon 17", "se enseñan formulas basicas")
-    inscripcion1 = Inscrito(x, [])
     xa = Estudiantes("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
     xb = Estudiantes("juan", 7, "871677777", "saul@gmail.com", "vivo")
     xc = Estudiantes("dante", 9, "8714563345", "dante@gmail.com", "muerto")
 
-    inscripcion1.insc_agregar(xa)
-    inscripcion1.insc_agregar(xb)
-    inscripcion1.insc_agregar(xc)
-    inscripcion1.insc_mostrar()
+    superInscri.agregar_a_Lista(Inscrito(x,xa))
+    superInscri.agregar_a_Lista(Inscrito(x,xb))
+    superInscri.agregar_a_Lista(Inscrito(x,xc))
+    superInscri.mostrar_Lista()
 
-    superInscri.agregar_a_Lista(inscripcion1)
     y = Cursos("español", 5, "A", "salon 14", "se enseña español ")
-    inscripcion2 = Inscrito(y, [])
     yd = Estudiantes("Noa", 8, "8714563324", "noe@gmail.com", "posiblemente vivo")
     ye = Estudiantes("paolin", 18, "9990001111", "locopaolin@gmail.com", "muerto")
-    inscripcion2.insc_agregar(yd)
-    inscripcion2.insc_agregar(ye)
+    superInscri.agregar_a_Lista(Inscrito(y, yd))
+    superInscri.agregar_a_Lista(Inscrito(y, ye))
+
 
     yf = Estudiantes("sanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "vivo")
 
-    inscripcion2.insc_editar(1, yf)
-    inscripcion2.insc_eliminar(0)
-    inscripcion2.insc_mostrar()
-
-
-
-
-
+    superInscri.editar_a_Lista(1, (Inscrito(y, yf)))
+    superInscri.eliminar_a_Lista(0)
+    superInscri.mostrar_Lista()
