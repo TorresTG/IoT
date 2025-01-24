@@ -10,15 +10,20 @@ class Methods:
         def clean_key(key):
             return key.lstrip('_').split('__')[-1]
 
-        def serialize(obj):
-            if isinstance(obj, (Methods, dict)):
-                return {clean_key(key): serialize(value) for key, value in
-                        (vars(obj) if isinstance(obj, Methods) else obj).items()}
-            if isinstance(obj, list):
-                return [serialize(item) for item in obj]
-            return obj
+        def process_value(value):
+            if isinstance(value, Methods):  # Si el valor es otro objeto de la clase, procesar recursivamente
+                return {clean_key(k): process_value(v) for k, v in vars(value).items()}
+            elif isinstance(value, list):  # Si es una lista, procesar cada elemento
+                return [process_value(item) for item in value]
+            elif isinstance(value, dict):  # Si es un diccionario, procesar sus valores
+                return {clean_key(k): process_value(v) for k, v in value.items()}
+            return value  # Devolver valores simples directamente
 
-        return json.dumps(serialize(self), indent=4)
+        # Crear un diccionario con las variables de instancia del objeto
+        serialized_data = {clean_key(k): process_value(v) for k, v in vars(self).items()}
+
+        # Convertir a JSON con formato
+        return json.dumps([serialized_data], indent=4)
 
 
     @property

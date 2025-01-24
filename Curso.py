@@ -1,3 +1,4 @@
+import json
 from symtable import Class
 from Methods import Methods
 ROJO = "\033[31m"

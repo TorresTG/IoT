@@ -1,3 +1,5 @@
+import json
+
 from Methods import Methods
 ROJO = "\033[31m"
 VERDE = "\033[32m"
@@ -18,6 +20,11 @@ class Estudiante(Methods):
             self.__telefono = telefono
             self.__email = email
             self.__estado = estado
+
+    def __str__(self):
+        return json.dumps(self.to_dict(), indent=4)
+    def convertir(self, value):
+        return json.loads(str(value))
 
     def to_dict(self):
         return {

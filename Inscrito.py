@@ -20,6 +20,7 @@ class Inscrito(Methods):
             self.__curso = cursos
             self.__estudiantes = estudiantes if estudiantes is not None else []
 
+
     def agregar_estudiante(self, estudiante):
         if estudiante not in self.__estudiantes:
             self.__estudiantes.append(estudiante)
@@ -46,6 +47,8 @@ class Inscrito(Methods):
             print(f"No existe nada en la posision: {index}")
 
 
+
+
 if __name__ == "__main__":
     superInscri = Inscrito()
 
@@ -65,10 +68,7 @@ if __name__ == "__main__":
 
     inscripcion2 = Inscrito(z, [za])
     superInscri.agregar_a_Lista(inscripcion2)
-
-    superInscri.mostrar_Lista()
-
-
+    print(superInscri)
 
     print("")
     print("se agrego estudiante dante")
