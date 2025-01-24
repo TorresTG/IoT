@@ -19,6 +19,15 @@ class Estudiante(Methods):
             self.__email = email
             self.__estado = estado
 
+    def to_dict(self):
+        return {
+            "nombre": self.__nombre,
+            "edad": self.__edad,
+            "telefono": self.__telefono,
+            "email": self.__email,
+            "estado": self.__estado
+        }
+
     def mostrar(self):
         print(self.__nombre)
         print(self.__edad)

@@ -21,6 +21,15 @@ class Curso(Methods):
             self.__salon = salon
             self.__descripcion = descripcion
 
+    def to_dict(self):
+        return {
+            "nombre": self.__nombre,
+            "grado": self.__grado,
+            "seccion": self.__seccion,
+            "salon": self.__salon,
+            "descripcion": self.__descripcion
+        }
+
 
     @property
     def nombre(self):
@@ -60,12 +69,12 @@ class Curso(Methods):
 if __name__ =="__main__":
     ClaseCurso = Curso()
     x = Curso("matematicas", 5,
-              "A", "salon 17", "se enseñan formulas basicas")
+              "A", "salon 17", "se ensenan formulas basicas")
 
     y = Curso("geologia", 6,
               "B", "salon 22", "se miran las gemas")
 
-    z = Curso("español", 3,
+    z = Curso("espanol", 3,
               "A", "salon 4", "se estudia el lenguaje")
 
     print(f"{VERDE}----POST AGREGAR CURSOS----{RESET}")

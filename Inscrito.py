@@ -1,3 +1,4 @@
+import json
 from itertools import count
 ROJO = "\033[31m"
 VERDE = "\033[32m"
@@ -18,14 +19,6 @@ class Inscrito(Methods):
         else:
             self.__curso = cursos
             self.__estudiantes = estudiantes if estudiantes is not None else []
-
-    def estudiantes(self, value):
-        if isinstance(value, list):
-            self.__estudiantes = value
-        else:
-            print("los estuidantes tienen que ser una lista")
-
-        # Métodos adicionales
 
     def agregar_estudiante(self, estudiante):
         if estudiante not in self.__estudiantes:
@@ -52,14 +45,6 @@ class Inscrito(Methods):
         else:
             print(f"No existe nada en la posision: {index}")
 
-    def __str__(self):
-        estudiantes_str = "\n-------\n".join(
-            [str(est) for est in self.__estudiantes])
-        return (
-            f"-------\nCurso: {self.__curso}\n-------\n"
-            f"Estudiantes inscritos:\n{estudiantes_str if estudiantes_str else 'Ninguno'}"
-        )
-
 
 if __name__ == "__main__":
     superInscri = Inscrito()
@@ -77,16 +62,18 @@ if __name__ == "__main__":
     inscripcion1 = Inscrito(x, [xa, xb])
     superInscri.agregar_a_Lista(inscripcion1)
 
+
     inscripcion2 = Inscrito(z, [za])
     superInscri.agregar_a_Lista(inscripcion2)
 
-
     superInscri.mostrar_Lista()
-    inscripcion1.agregar_estudiante(xc)
+
+
+
     print("")
     print("se agrego estudiante dante")
     print("")
-
+    inscripcion1.agregar_estudiante(xc)
     superInscri.mostrar_Lista()
 
     print(f"\n{ROJO}----ELIMINAR INSCRIPCIONES----{RESET}")

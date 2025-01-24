@@ -1,3 +1,5 @@
+import json
+
 
 class Methods:
 
@@ -5,10 +7,18 @@ class Methods:
         self.__lista_clases = []
 
     def __str__(self):
-        return "\n".join(
-            f"{key} : \033[35m{value}\033[0m" for key, value in self.__dict__.items()
-            if not key.startswith('_Methods__')
-        )
+        def clean_key(key):
+            return key.lstrip('_').split('__')[-1]
+
+        def serialize(obj):
+            if isinstance(obj, (Methods, dict)):
+                return {clean_key(key): serialize(value) for key, value in
+                        (vars(obj) if isinstance(obj, Methods) else obj).items()}
+            if isinstance(obj, list):
+                return [serialize(item) for item in obj]
+            return obj
+
+        return json.dumps(serialize(self), indent=4)
 
 
     @property
@@ -32,5 +42,4 @@ class Methods:
 
     def mostrar_Lista(self):
         for x in self.__lista_clases:
-            print(x)
-            print("--------")
+            print(f"{x},")
