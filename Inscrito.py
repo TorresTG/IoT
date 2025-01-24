@@ -1,8 +1,5 @@
 from itertools import count
-ROJO = "\033[31m"
-VERDE = "\033[32m"
-AMARILLO = "\033[33m"
-RESET = "\033[0m"
+
 
 
 from Curso import Curso as Cursos
@@ -10,94 +7,76 @@ from Estudiante import Estudiante as Estudiantes
 from Methods import Methods
 
 
-class Inscrito(Methods):
+class Inscrito(Cursos, Estudiantes, Methods):
 
-    def __init__(self, cursos = None, estudiantes = None):
-        if (cursos or estudiantes) is None:
+    def __init__(self, cursos: Cursos, estudiantes: []):
+        if Cursos is None:
             super().__init__()
         else:
             self.__curso = cursos
-            self.__estudiantes = estudiantes if estudiantes is not None else []
+            self.__estudiantes = estudiantes
 
-    def estudiantes(self, value):
-        if isinstance(value, list):
-            self.__estudiantes = value
+
+    def insc_agregar(self, estu: Estudiantes):
+        self.__estudiantes.append(estu)
+
+    def insc_eliminar(self, index):
+        if 0 <= index < len(self.__estudiantes):
+            del self.__estudiantes[index]
         else:
-            print("los estuidantes tienen que ser una lista")
+            print(f"No existe el valor en la posicion: {index}")
 
-        # Métodos adicionales
-
-    def agregar_estudiante(self, estudiante):
-        if estudiante not in self.__estudiantes:
-            self.__estudiantes.append(estudiante)
+    def insc_editar(self, index, nuevo_curso):
+        if 0 <= index < len(self.__estudiantes):
+            self.__estudiantes[index] = nuevo_curso
         else:
-            print(f"ya existe el estudiante")
+            print(f"No existe el valor en la posicion: {index}")
 
-    def eliminar_estudiante(self, estudiante):
-        if estudiante in self.__estudiantes:
-            self.__estudiantes.remove(estudiante)
-        else:
-            print(f"no exite el estudiante: {estudiante}")
+    def insc_mostrar(self):
+        a = True
+        for propiedades_estudiantes in self.__estudiantes:
+            if a:
+                print("Curso:")
+                print("\n".join(
+                    f"\t{key[8:]} : \033[35m{value}\033[0m"  # Eliminar el prefijo '__Curso__'
+                    for key, value in self.__curso.__dict__.items()
+                    if key.startswith(f"_{self.__curso.__class__.__name__}__")))
+                print("\t--------")
 
-    def editar_inscripcion(self, index, nuevos_curso=None, nuevos_estudiantes=[]):
-        if 0 <= index < len(self.lista_clases):
-            clase_actual = self.lista_clases[index]
-            if nuevos_curso is not None:
-                clase_actual.__curso = nuevos_curso
+                a = False
+            print(propiedades_estudiantes)
+            print("--------")
 
-            if nuevos_estudiantes != [None]:
-                clase_actual.__estudiantes = nuevos_estudiantes
-
-            self.lista_clases[index] = clase_actual
-        else:
-            print(f"No existe nada en la posision: {index}")
-
-    def __str__(self):
-        estudiantes_str = "\n-------\n".join(
-            [str(est) for est in self.__estudiantes])
-        return (
-            f"-------\nCurso: {self.__curso}\n-------\n"
-            f"Estudiantes inscritos:\n{estudiantes_str if estudiantes_str else 'Ninguno'}"
-        )
 
 
 if __name__ == "__main__":
-    superInscri = Inscrito()
-
-    print(f"{VERDE}----AÑADIR INSCRIPCIONES----{RESET}")
+    superInscri = Inscrito(None,[])
     x = Cursos("matematicas", 5, "A", "salon 17", "se enseñan formulas basicas")
+    inscripcion1 = Inscrito(x, [])
     xa = Estudiantes("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
     xb = Estudiantes("juan", 7, "871677777", "saul@gmail.com", "vivo")
     xc = Estudiantes("dante", 9, "8714563345", "dante@gmail.com", "muerto")
 
-    z = Cursos("manualidades", 9, "T", "salon 100", "se enseña a usar la mano")
-    za = Estudiantes("Ana", 29, "6666666666", "anamaseter@gmail.com", "ascendiendo a dios")
+    inscripcion1.insc_agregar(xa)
+    inscripcion1.insc_agregar(xb)
+    inscripcion1.insc_agregar(xc)
+    inscripcion1.insc_mostrar()
 
-    inscripcion1 = Inscrito(x, [xa, xb])
     superInscri.agregar_a_Lista(inscripcion1)
-
-    inscripcion2 = Inscrito(z, [za])
-    superInscri.agregar_a_Lista(inscripcion2)
-
-
-    superInscri.mostrar_Lista()
-    inscripcion1.agregar_estudiante(xc)
-    print("")
-    print("se agrego estudiante dante")
-    print("")
-
-    superInscri.mostrar_Lista()
-
-    print(f"\n{ROJO}----ELIMINAR INSCRIPCIONES----{RESET}")
-
-    superInscri.eliminar_a_Lista(1)
-    superInscri.mostrar_Lista()
-
-    print(f"\n{AMARILLO}----EDITAR INSCRIPCIONES----{RESET}")
-    y = Cursos("español", 5, "A", "salon 14", "se enseña español")
+    y = Cursos("español", 5, "A", "salon 14", "se enseña español ")
+    inscripcion2 = Inscrito(y, [])
     yd = Estudiantes("Noa", 8, "8714563324", "noe@gmail.com", "posiblemente vivo")
     ye = Estudiantes("paolin", 18, "9990001111", "locopaolin@gmail.com", "muerto")
-    yf = Estudiantes("SanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "Vivo")
+    inscripcion2.insc_agregar(yd)
+    inscripcion2.insc_agregar(ye)
 
-    superInscri.editar_inscripcion(0, nuevos_curso=y, nuevos_estudiantes=[yd, ye, yf])
-    superInscri.mostrar_Lista()
+    yf = Estudiantes("sanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "vivo")
+
+    inscripcion2.insc_editar(1, yf)
+    inscripcion2.insc_eliminar(0)
+    inscripcion2.insc_mostrar()
+
+
+
+
+
