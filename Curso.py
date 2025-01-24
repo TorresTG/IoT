@@ -8,6 +8,7 @@ RESET = "\033[0m"
 
 
 
+
 class Curso(Methods):
 
     def __init__(self, nombre = None, grado= None, seccion=None, salon=None, descripcion=None):

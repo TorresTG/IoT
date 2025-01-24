@@ -7,6 +7,7 @@ from Estudiante import Estudiante as Estudiantes
 from Methods import Methods
 
 
+
 class Inscrito(Methods):
 
     def __init__(self, cursos = None, estudiantes = None):

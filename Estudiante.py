@@ -5,6 +5,7 @@ AMARILLO = "\033[33m"
 RESET = "\033[0m"
 
 
+
 class Estudiante(Methods):
     def __init__(self, nombre = None, edad = None, telefono = None, email = None, estado = None):
         if (nombre or edad or telefono or email or estado) is None:
