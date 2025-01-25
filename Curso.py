@@ -82,12 +82,12 @@ if __name__ =="__main__":
     ClaseCurso.agregar_a_Lista(x)
     ClaseCurso.agregar_a_Lista(y)
     ClaseCurso.agregar_a_Lista(z)
-    ClaseCurso.mostrar_Lista()
+    print(ClaseCurso)
     print("")
 
     print(f"{ROJO}----POST ELIMINAR CURSOS----{RESET}")
     ClaseCurso.eliminar_a_Lista(1)
-    ClaseCurso.mostrar_Lista()
+    print(ClaseCurso)
     print("")
 
     print(f"{AMARILLO}----POST EDITAR CURSOS----{RESET}")
@@ -98,7 +98,7 @@ if __name__ =="__main__":
 
     ClaseCurso.editar_a_Lista(0, a)
     ClaseCurso.editar_a_Lista(1, b)
-    ClaseCurso.mostrar_Lista()
+    print(ClaseCurso)
 
 
 
