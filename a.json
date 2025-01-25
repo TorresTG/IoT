@@ -1,0 +1,116 @@
+[
+        {
+            "curso": {
+                "nombre": "matematicas",
+                "grado": 5,
+                "seccion": "A",
+                "salon": "salon 17",
+                "descripcion": "se ense\u00f1an formulas basicas"
+            },
+            "estudiantes": [
+                {
+                    "nombre": "pepo",
+                    "edad": 5,
+                    "telefono": "871674998",
+                    "email": "pepe123@gmail.com",
+                    "estado": "muerto"
+                },
+                {
+                    "nombre": "juan",
+                    "edad": 7,
+                    "telefono": "871677777",
+                    "email": "saul@gmail.com",
+                    "estado": "vivo"
+                },
+                {
+                    "nombre": "dante",
+                    "edad": 9,
+                    "telefono": "8714563345",
+                    "email": "dante@gmail.com",
+                    "estado": "muerto"
+                }
+            ]
+        },
+  {
+    "curso": {
+      "nombre": "manualidades",
+      "grado": 9,
+      "seccion": "T",
+      "salon": "salon 100",
+      "descripcion": "se ense\u00f1a a usar la mano"
+    },
+    "estudiantes": [
+      {
+        "nombre": "Ana",
+        "edad": 29,
+        "telefono": "6666666666",
+        "email": "anamaseter@gmail.com",
+        "estado": "ascendiendo a dios"
+      }
+    ]
+  },
+  {
+    "curso": {
+      "nombre": "manualidades",
+      "grado": 9,
+      "seccion": "T",
+      "salon": "salon 100",
+      "descripcion": "se ense\u00f1a a usar la mano"
+    },
+    "estudiantes": [
+      {
+        "nombre": "Ana",
+        "edad": 29,
+        "telefono": "6666666666",
+        "email": "anamaseter@gmail.com",
+        "estado": "ascendiendo a dios"
+      }
+    ]
+  }
+],
+
+    [
+        {
+            "curso": {
+                "nombre": "matematicas",
+                "grado": 5,
+                "seccion": "A",
+                "salon": "salon 17",
+                "descripcion": "se ense\u00f1an formulas basicas"
+            },
+            "estudiantes": [
+                {
+                    "nombre": "pepo",
+                    "edad": 5,
+                    "telefono": "871674998",
+                    "email": "pepe123@gmail.com",
+                    "estado": "muerto"
+                },
+                {
+                    "nombre": "juan",
+                    "edad": 7,
+                    "telefono": "871677777",
+                    "email": "saul@gmail.com",
+                    "estado": "vivo"
+                }
+            ]
+        },
+        {
+            "curso": {
+                "nombre": "manualidades",
+                "grado": 9,
+                "seccion": "T",
+                "salon": "salon 100",
+                "descripcion": "se ense\u00f1a a usar la mano"
+            },
+            "estudiantes": [
+                {
+                    "nombre": "Ana",
+                    "edad": 29,
+                    "telefono": "6666666666",
+                    "email": "anamaseter@gmail.com",
+                    "estado": "ascendiendo a dios"
+                }
+            ]
+        }
+    ]

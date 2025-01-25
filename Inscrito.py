@@ -69,17 +69,17 @@ if __name__ == "__main__":
     inscripcion2 = Inscrito(z, [za])
     superInscri.agregar_a_Lista(inscripcion2)
     print(superInscri)
-
     print("")
     print("se agrego estudiante dante")
     print("")
     inscripcion1.agregar_estudiante(xc)
-    superInscri.mostrar_Lista()
+    #superInscri.mostrar_Lista()
+    print(superInscri)
 
     print(f"\n{ROJO}----ELIMINAR INSCRIPCIONES----{RESET}")
 
     superInscri.eliminar_a_Lista(1)
-    superInscri.mostrar_Lista()
+    print(superInscri)
 
     print(f"\n{AMARILLO}----EDITAR INSCRIPCIONES----{RESET}")
     y = Cursos("español", 5, "A", "salon 14", "se enseña español")
@@ -88,4 +88,5 @@ if __name__ == "__main__":
     yf = Estudiantes("SanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "Vivo")
 
     superInscri.editar_inscripcion(0, nuevos_curso=y, nuevos_estudiantes=[yd, ye, yf])
-    superInscri.mostrar_Lista()
+    #superInscri.mostrar_Lista()
+    print(superInscri)

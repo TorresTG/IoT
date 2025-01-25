@@ -11,19 +11,19 @@ class Methods:
             return key.lstrip('_').split('__')[-1]
 
         def process_value(value):
-            if isinstance(value, Methods):  # Si el valor es otro objeto de la clase, procesar recursivamente
+            if isinstance(value, Methods):
                 return {clean_key(k): process_value(v) for k, v in vars(value).items()}
-            elif isinstance(value, list):  # Si es una lista, procesar cada elemento
+            elif isinstance(value, list):
                 return [process_value(item) for item in value]
-            elif isinstance(value, dict):  # Si es un diccionario, procesar sus valores
+            elif isinstance(value, dict):
                 return {clean_key(k): process_value(v) for k, v in value.items()}
-            return value  # Devolver valores simples directamente
+            return value
 
-        # Crear un diccionario con las variables de instancia del objeto
-        serialized_data = {clean_key(k): process_value(v) for k, v in vars(self).items()}
+        serialized_data = [process_value(item) for item in self.__lista_clases]
 
         # Convertir a JSON con formato
-        return json.dumps([serialized_data], indent=4)
+        return json.dumps(serialized_data, indent=4)
+
 
 
     @property
