@@ -1,10 +1,12 @@
 import json
+import os
+
 from itertools import count
 ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
-
+documents_path = os.path.expanduser("~/Documents")
 
 from Curso import Curso as Cursos
 from Estudiante import Estudiante as Estudiantes
@@ -90,3 +92,17 @@ if __name__ == "__main__":
     superInscri.editar_inscripcion(0, nuevos_curso=y, nuevos_estudiantes=[yd, ye, yf])
     #superInscri.mostrar_Lista()
     print(superInscri)
+
+    base_name = "inscrito"
+    extension = ".txt"
+    counter = 1
+    file_path = os.path.join(documents_path, f"{base_name}{extension}")
+
+    while os.path.exists(file_path):
+        file_path = os.path.join(documents_path, f"{base_name}_{counter}{extension}")
+        counter += 1
+
+    with open(file_path, "w") as file:
+        file.write(str(superInscri))
+
+    print(f"Archivo guardado en: {file_path}")
