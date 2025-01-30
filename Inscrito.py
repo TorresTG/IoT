@@ -2,80 +2,65 @@ import json
 import os
 
 from itertools import count
+
 ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
 documents_path = os.path.expanduser("~/Documents")
 
-from Curso import Curso as Cursos
-from Estudiante import Estudiante as Estudiantes
+from Curso import Curso
+from Estudiante import Estudiante
 from Methods import Methods
 
 
 class Inscrito(Methods):
 
-    def __init__(self, cursos = None, estudiantes = None):
+    def __init__(self, cursos=None, estudiantes=None):
         if (cursos or estudiantes) is None:
             super().__init__()
         else:
-            self.__curso = cursos
-            self.__estudiantes = estudiantes if estudiantes is not None else []
+            self.curso = cursos
+            self.estudiantes = Estudiante()
 
+    def interpretar_inscritos(self, datos_del_json):
+        lista_inscripciones = json.loads(datos_del_json)
+        for item in lista_inscripciones:
+            INSCRIPCION = Inscrito(Curso.interpretar_Curso(item))
+            # Agregar estudiantes al inscrito
 
-    def agregar_estudiante(self, estudiante):
-        if estudiante not in self.__estudiantes:
-            self.__estudiantes.append(estudiante)
-        else:
-            print(f"ya existe el estudiante")
-
-    def eliminar_estudiante(self, estudiante):
-        if estudiante in self.__estudiantes:
-            self.__estudiantes.remove(estudiante)
-        else:
-            print(f"no exite el estudiante: {estudiante}")
-
-    def editar_inscripcion(self, index, nuevos_curso=None, nuevos_estudiantes=[]):
-        if 0 <= index < len(self.lista_clases):
-            clase_actual = self.lista_clases[index]
-            if nuevos_curso is not None:
-                clase_actual.__curso = nuevos_curso
-
-            if nuevos_estudiantes != [None]:
-                clase_actual.__estudiantes = nuevos_estudiantes
-
-            self.lista_clases[index] = clase_actual
-        else:
-            print(f"No existe nada en la posision: {index}")
-
-
+            arreglo_estudiante = [Estudiante.interpretar_Estudiante(item)]
+            for estudiante in arreglo_estudiante:
+                INSCRIPCION.estudiantes.agregar_a_Lista(estudiante)
+        return INSCRIPCION
 
 
 if __name__ == "__main__":
     superInscri = Inscrito()
 
     print(f"{VERDE}----AÑADIR INSCRIPCIONES----{RESET}")
-    x = Cursos("matematicas", 5, "A", "salon 17", "se enseñan formulas basicas")
-    xa = Estudiantes("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
-    xb = Estudiantes("juan", 7, "871677777", "saul@gmail.com", "vivo")
-    xc = Estudiantes("dante", 9, "8714563345", "dante@gmail.com", "muerto")
+    x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
+    xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
+    xb = Estudiante("juan", 7, "871677777", "saul@gmail.com", "vivo")
+    xc = Estudiante("dante", 9, "8714563345", "dante@gmail.com", "muerto")
 
+    z = Curso("manualidades", 9, "T", "salon 100", "se ensena a usar la mano")
+    za = Estudiante("Ana", 29, "6666666666", "anamaseter@gmail.com", "ascendiendo a dios")
 
-    z = Cursos("manualidades", 9, "T", "salon 100", "se enseña a usar la mano")
-    za = Estudiantes("Ana", 29, "6666666666", "anamaseter@gmail.com", "ascendiendo a dios")
-
-    inscripcion1 = Inscrito(x, [xa, xb])
+    inscripcion1 = Inscrito(x)
+    inscripcion1.estudiantes.agregar_a_Lista(xa)
+    inscripcion1.estudiantes.agregar_a_Lista(xb)
     superInscri.agregar_a_Lista(inscripcion1)
 
-
-    inscripcion2 = Inscrito(z, [za])
+    inscripcion2 = Inscrito(z)
+    inscripcion2.estudiantes.agregar_a_Lista(za)
     superInscri.agregar_a_Lista(inscripcion2)
     print(superInscri)
     print("")
     print("se agrego estudiante dante")
     print("")
-    inscripcion1.agregar_estudiante(xc)
-    #superInscri.mostrar_Lista()
+
+    inscripcion1.estudiantes.agregar_a_Lista(xc)
     print(superInscri)
 
     print(f"\n{ROJO}----ELIMINAR INSCRIPCIONES----{RESET}")
@@ -84,17 +69,22 @@ if __name__ == "__main__":
     print(superInscri)
 
     print(f"\n{AMARILLO}----EDITAR INSCRIPCIONES----{RESET}")
-    y = Cursos("español", 5, "A", "salon 14", "se enseña español")
-    yd = Estudiantes("Noa", 8, "8714563324", "noe@gmail.com", "posiblemente vivo")
-    ye = Estudiantes("paolin", 18, "9990001111", "locopaolin@gmail.com", "muerto")
-    yf = Estudiantes("SanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "Vivo")
+    y = Curso("espanol", 5, "A", "salon 14", "se ensena espanol")
+    yd = Estudiante("Noa", 8, "8714563324", "noe@gmail.com", "posiblemente vivo")
+    ye = Estudiante("paolin", 18, "9990001111", "locopaolin@gmail.com", "muerto")
+    yf = Estudiante("SanFaldon", 67, "8777666555", "faldonsin123@gmail.com", "Vivo")
 
-    superInscri.editar_inscripcion(0, nuevos_curso=y, nuevos_estudiantes=[yd, ye, yf])
-    #superInscri.mostrar_Lista()
+    inscripcion3 = Inscrito(y)
+    inscripcion3.estudiantes.agregar_a_Lista(yd)
+    inscripcion3.estudiantes.agregar_a_Lista(ye)
+    inscripcion3.estudiantes.agregar_a_Lista(yf)
+
+    superInscri.editar_a_Lista(0, inscripcion3)
+    # superInscri.mostrar_Lista()
     print(superInscri)
 
     base_name = "inscrito"
-    extension = ".txt"
+    extension = ".json"
     counter = 1
     file_path = os.path.join(documents_path, f"{base_name}{extension}")
 
@@ -102,7 +92,26 @@ if __name__ == "__main__":
         file_path = os.path.join(documents_path, f"{base_name}_{counter}{extension}")
         counter += 1
 
-    with open(file_path, "w") as file:
-        file.write(str(superInscri))
+    #with open(file_path, "w") as file:
+        #file.write(str(superInscri))
 
-    print(f"Archivo guardado en: {file_path}")
+    #print(f"Archivo guardado en: {file_path}")
+
+    #print(f"mos: {file_path}")
+
+    print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
+
+    ruta_json = "/Users/torres/Documents/inscrito.json"
+
+    # Leer el archivo y guardar su contenido en datos_json
+    with open(ruta_json, "r", encoding="utf-8") as archivo:
+        datos_json = archivo.read()
+
+    superInscri.agregar_a_Lista(inscripcion1.interpretar_inscritos(datos_json))
+
+    print(superInscri)
+
+
+
+
+

@@ -5,7 +5,7 @@
                 "grado": 5,
                 "seccion": "A",
                 "salon": "salon 17",
-                "descripcion": "se ense\u00f1an formulas basicas"
+                "descripcion": "se ensean formulas basicas"
             },
             "estudiantes": [
                 {
@@ -114,3 +114,37 @@
             ]
         }
     ]
+
+#metodo funcional para imprimir un json
+    lista_inscripciones = json.loads(datos_json)
+
+    # Crear el objeto principal para almacenar las inscripciones
+    superInscri = Inscrito()
+
+    # Procesar inscripciones en un solo ciclo
+    for inscripcion in lista_inscripciones:
+        curso = Curso(**inscripcion["curso"])  # Crear objeto Curso con kwargs
+        inscrito = Inscrito(curso)
+
+        #cosa que se podria agregar: inscrito = Inscrito(Curso.interpretar_Curso(lista_inscripciones))
+        # Agregar estudiantes al inscrito
+        estudiantes = [Estudiante(**est) for est in inscripcion["estudiantes"]]
+        for estudiante in estudiantes:
+            inscrito.estudiantes.agregar_a_Lista(estudiante)
+
+        # Agregar inscripción a la lista principal
+        superInscri.agregar_a_Lista(inscrito)
+
+    # Mostrar el resultado
+    print(superInscri)
+
+
+
+ESTO OTRO TAMBIEN PODRIA SERVIR:
+
+ @staticmethod
+    def interpretar_inscritos(self, item, identificador):
+        if identificador:
+            return Inscrito(Curso.interpretar_Curso(item))
+        else:
+            return [Estudiante.interpretar_Estudiante(item)]

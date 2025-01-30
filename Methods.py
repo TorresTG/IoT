@@ -1,6 +1,7 @@
 import json
 
 
+
 class Methods:
 
     def __init__(self):
@@ -12,19 +13,23 @@ class Methods:
 
         def process_value(value):
             if isinstance(value, Methods):
-                return {clean_key(k): process_value(v) for k, v in vars(value).items()}
+                # Procesa los atributos del objeto Methods
+                result = {clean_key(k): process_value(v) for k, v in vars(value).items()}
+                # este if sirve para quitar el nombre de el arreglo de estudiantes
+                if 'lista_clases' in result:
+                    return result['lista_clases']
+                return result
             elif isinstance(value, list):
+                # Procesa cada elemento en una lista recursivamente
                 return [process_value(item) for item in value]
             elif isinstance(value, dict):
+                # Procesa cada clave-valor en un diccionario
                 return {clean_key(k): process_value(v) for k, v in value.items()}
-            return value
+            return value  # Retorna directamente valores simples
 
-        serialized_data = [process_value(item) for item in self.__lista_clases]
-
-        # Convertir a JSON con formato
+        # Procesa la lista interna de clases y convierte a JSON
+        serialized_data = [process_value(item) for item in self.lista_clases]
         return json.dumps(serialized_data, indent=4)
-
-
 
     @property
     def lista_clases(self):
@@ -48,3 +53,19 @@ class Methods:
     def mostrar_Lista(self):
         for x in self.__lista_clases:
             print(f"{x},")
+    """
+    def interpretar_json(self, datos_del_json):
+        lista_inscripciones = json.loads(datos_del_json)
+        for item in lista_inscripciones:
+            INSCRIPCION = Inscrito(Curso.interpretar_Curso(item,True))
+            # Agregar estudiantes al inscrito
+
+            arreglo_estudiante = [Estudiante.interpretar_Estudiante(item)]
+            for estudiante in arreglo_estudiante:
+                INSCRIPCION.estudiantes.agregar_a_Lista(estudiante)
+        return INSCRIPCION
+    """
+
+
+
+

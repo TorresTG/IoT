@@ -5,7 +5,7 @@ ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
-
+from Estudiante import Estudiante
 
 
 
@@ -66,6 +66,10 @@ class Curso(Methods):
 
     def set_descripcion(self, value):
         self.__descripcion = value
+
+    @staticmethod
+    def interpretar_Curso(item):
+            return Curso(**item["curso"])
 
 if __name__ =="__main__":
     ClaseCurso = Curso()
