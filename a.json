@@ -148,3 +148,81 @@ ESTO OTRO TAMBIEN PODRIA SERVIR:
             return Inscrito(Curso.interpretar_Curso(item))
         else:
             return [Estudiante.interpretar_Estudiante(item)]
+
+
+guardar:
+    def jsonObject(self):
+        documents_path = os.path.expanduser("~/Documents")
+        base_name = "inscrito"
+        extension = ".json"
+        counter = 1
+        file_path = os.path.join(documents_path, f"{base_name}{extension}")
+
+
+        while os.path.exists(file_path):
+            file_path = os.path.join(documents_path, f"{base_name}_{counter}{extension}")
+            counter += 1
+
+ with open(file_path, "w") as file:
+        file.write(str(superInscri))
+
+    print(f"Archivo guardado en: {file_path}")
+
+
+
+
+
+
+counter = 1
+        file_path = "/Users/torres/Documents/inscrito.json"
+
+        with open(file_path, "w") as file:
+            file.write(str(Clase_a_guardar))
+        print(f"El archivo se guardara en: {file_path}")
+        return file_path
+
+
+
+#esto por alguna razon funciona, averiguar por que?
+    def __str__(self):
+        datos = {}
+
+        datos["curso"] = self.curso.__dict__
+        datos["inscritos"] = [
+            item.__dict__ if hasattr(item, "__dict__") else item
+            for item in self.estudiantes.lista_clases
+        ]
+
+        if hasattr(self, "lista_clases"):
+            datos["lista_clases"] = [
+                # Se convierte cada elemento a cadena; se invoca su propio __str__
+                str(item) for item in self.lista_clases
+            ]
+
+        return json.dumps(datos, indent=4, ensure_ascii=False)
+
+
+    def __str__(self):
+        datos = {}
+
+        # Procesar el curso para limpiar las claves
+        curso_dict = {}
+        for key, value in self.curso.__dict__.items():
+            # Eliminar el prefijo '_Curso__' de las claves
+            clean_key = key.replace('_Curso__', '')
+            curso_dict[clean_key] = value
+        datos["curso"] = curso_dict
+
+        # Procesar la lista de estudiantes
+        estudiantes_list = []
+        for item in self.estudiantes.lista_clases:
+            if hasattr(item, "__dict__"):
+                estudiante_dict = {}
+                for k, v in item.__dict__.items():
+                    # Eliminar el prefijo '_Estudiante__' de las claves
+                    clean_k = k.replace('_Estudiante__', '')
+                    estudiante_dict[clean_k] = v
+                estudiantes_list.append(estudiante_dict)
+            else:
+                estudiantes_list.append(item)
+        datos["estudiantes"] = estudiantes_list  # Cambiar clave a "estudiantes"

@@ -22,14 +22,12 @@ class Curso(Methods):
             self.__salon = salon
             self.__descripcion = descripcion
 
-    def to_dict(self):
-        return {
-            "nombre": self.__nombre,
-            "grado": self.__grado,
-            "seccion": self.__seccion,
-            "salon": self.__salon,
-            "descripcion": self.__descripcion
+    def __str__(self):
+        datos = {
+            key.replace(f"_{self.__class__.__name__}__", ""): value
+            for key, value in self.__dict__.items()
         }
+        return json.dumps(datos, indent=4, ensure_ascii=False)
 
 
     @property
@@ -86,12 +84,12 @@ if __name__ =="__main__":
     ClaseCurso.agregar_a_Lista(x)
     ClaseCurso.agregar_a_Lista(y)
     ClaseCurso.agregar_a_Lista(z)
-    print(ClaseCurso)
+    ClaseCurso.mostrar_Lista()
     print("")
 
     print(f"{ROJO}----POST ELIMINAR CURSOS----{RESET}")
     ClaseCurso.eliminar_a_Lista(1)
-    print(ClaseCurso)
+    ClaseCurso.mostrar_Lista()
     print("")
 
     print(f"{AMARILLO}----POST EDITAR CURSOS----{RESET}")
@@ -102,7 +100,7 @@ if __name__ =="__main__":
 
     ClaseCurso.editar_a_Lista(0, a)
     ClaseCurso.editar_a_Lista(1, b)
-    print(ClaseCurso)
+    ClaseCurso.mostrar_Lista()
 
 
 

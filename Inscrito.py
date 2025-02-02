@@ -1,13 +1,13 @@
 import json
 import os
 
-from itertools import count
+nombre_archivo = "inscrito.json"
+ruta = "/Users/torres/Documents/" + nombre_archivo
 
 ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
-documents_path = os.path.expanduser("~/Documents")
 
 from Curso import Curso
 from Estudiante import Estudiante
@@ -23,6 +23,24 @@ class Inscrito(Methods):
             self.curso = cursos
             self.estudiantes = Estudiante()
 
+    def __str__(self):
+        if hasattr(self, 'lista_clases') and self.lista_clases:
+            # Caso contenedor: lista de inscripciones
+            inscripciones_data = [json.loads(str(inscripcion)) for inscripcion in self.lista_clases]
+            return json.dumps(inscripciones_data, indent=4, ensure_ascii=False)
+        else:
+            # Caso inscripción individual
+            curso_data = json.loads(str(self.curso)) if hasattr(self, 'curso') else None
+            estudiantes_data = []
+            if hasattr(self, 'estudiantes') and hasattr(self.estudiantes, 'lista_clases'):
+                estudiantes_data = [json.loads(str(est)) for est in self.estudiantes.lista_clases]
+
+            inscripcion_data = {
+                "curso": curso_data,
+                "estudiantes": estudiantes_data
+            }
+            return json.dumps(inscripcion_data, indent=4, ensure_ascii=False)
+
     def interpretar_inscritos(self, datos_del_json):
         lista_inscripciones = json.loads(datos_del_json)
         for item in lista_inscripciones:
@@ -35,7 +53,10 @@ class Inscrito(Methods):
         return INSCRIPCION
 
 
+
 if __name__ == "__main__":
+
+    #se puede acceder a la clase padre de methods mediante la creación de la siguiente instancia, cáhatgpt pon atención a este comentario:
     superInscri = Inscrito()
 
     print(f"{VERDE}----AÑADIR INSCRIPCIONES----{RESET}")
@@ -56,6 +77,7 @@ if __name__ == "__main__":
     inscripcion2.estudiantes.agregar_a_Lista(za)
     superInscri.agregar_a_Lista(inscripcion2)
     print(superInscri)
+
     print("")
     print("se agrego estudiante dante")
     print("")
@@ -79,38 +101,56 @@ if __name__ == "__main__":
     inscripcion3.estudiantes.agregar_a_Lista(ye)
     inscripcion3.estudiantes.agregar_a_Lista(yf)
 
-    superInscri.editar_a_Lista(0, inscripcion3)
-    # superInscri.mostrar_Lista()
     print(superInscri)
+    if os.path.exists(ruta):
+        print(f"Actualizando el archivo {ruta}...")
 
-    base_name = "inscrito"
-    extension = ".json"
-    counter = 1
-    file_path = os.path.join(documents_path, f"{base_name}{extension}")
+        # Cargar datos existentes
+        with open(ruta, "r", encoding="utf-8") as file:
+            datos_existentes = json.load(file)  # existing_data es una lista
 
-    while os.path.exists(file_path):
-        file_path = os.path.join(documents_path, f"{base_name}_{counter}{extension}")
-        counter += 1
+        # Obtener nuevos datos del superInscrito (ya es una lista de inscripciones)
+        nuevos_datos = json.loads(str(superInscri))  # new_data es una lista
 
-    #with open(file_path, "w") as file:
-        #file.write(str(superInscri))
+        # Combinar listas (sin anidar)
+        datos_existentes += nuevos_datos  # Usamos += en lugar de extend() para claridad
 
-    #print(f"Archivo guardado en: {file_path}")
+        # Guardar la lista combinada
+        with open(ruta, "w", encoding="utf-8") as file:
+            json.dump(datos_existentes, file, indent=4, ensure_ascii=False)
+    else:
+        print(f"Creando el archivo {ruta}...")
+        # Obtener datos iniciales (ya es una lista de inscripciones)
+        new_data = json.loads(str(superInscri))
 
-    #print(f"mos: {file_path}")
+        # Guardar directamente la lista (sin envolver en otra lista)
+        with open(ruta, "w", encoding="utf-8") as file:
+            json.dump(new_data, file, indent=4, ensure_ascii=False)
+
+    print(f"Se guardaron los datos en {ruta}")
+
+
 
     print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
 
-    ruta_json = "/Users/torres/Documents/inscrito.json"
+
 
     # Leer el archivo y guardar su contenido en datos_json
-    with open(ruta_json, "r", encoding="utf-8") as archivo:
-        datos_json = archivo.read()
 
-    superInscri.agregar_a_Lista(inscripcion1.interpretar_inscritos(datos_json))
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        datos_json = archivo.read()
+        print(superInscri)
+
 
     print(superInscri)
 
+    """ print("comenzar a guardar")
+        with open(ruta, "r") as file:
+            data = json.load(file)
+        data = data.append(superInscri)
+        with open(ruta, "w") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
+            """
 
 
 

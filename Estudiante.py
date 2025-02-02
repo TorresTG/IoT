@@ -22,25 +22,12 @@ class Estudiante(Methods):
             self.__estado = estado
 
     def __str__(self):
-        return json.dumps(self.to_dict(), indent=4)
-    def convertir(self, value):
-        return json.loads(str(value))
-
-    def to_dict(self):
-        return {
-            "nombre": self.__nombre,
-            "edad": self.__edad,
-            "telefono": self.__telefono,
-            "email": self.__email,
-            "estado": self.__estado
+        datos = {
+            key.replace(f"_{self.__class__.__name__}__", ""): value
+            for key, value in self.__dict__.items()
         }
+        return json.dumps(datos, indent=4, ensure_ascii=False)
 
-    def mostrar(self):
-        print(self.__nombre)
-        print(self.__edad)
-        print(self.__telefono)
-        print(self.__email)
-        print(self.__estado)
 
     @property
     def nombre(self):
