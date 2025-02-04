@@ -65,9 +65,6 @@ class Curso(Methods):
     def set_descripcion(self, value):
         self.__descripcion = value
 
-    @staticmethod
-    def interpretar_Curso(item):
-            return Curso(**item["curso"])
 
 if __name__ =="__main__":
     ClaseCurso = Curso()

@@ -41,16 +41,6 @@ class Inscrito(Methods):
             }
             return json.dumps(inscripcion_data, indent=4, ensure_ascii=False)
 
-    def interpretar_inscritos(self, datos_del_json):
-        lista_inscripciones = json.loads(datos_del_json)
-        for item in lista_inscripciones:
-            INSCRIPCION = Inscrito(Curso.interpretar_Curso(item))
-            # Agregar estudiantes al inscrito
-
-            arreglo_estudiante = [Estudiante.interpretar_Estudiante(item)]
-            for estudiante in arreglo_estudiante:
-                INSCRIPCION.estudiantes.agregar_a_Lista(estudiante)
-        return INSCRIPCION
 
 
 
@@ -102,30 +92,7 @@ if __name__ == "__main__":
     inscripcion3.estudiantes.agregar_a_Lista(yf)
 
     print(superInscri)
-    if os.path.exists(ruta):
-        print(f"Actualizando el archivo {ruta}...")
-
-        # Cargar datos existentes
-        with open(ruta, "r", encoding="utf-8") as file:
-            datos_existentes = json.load(file)  # existing_data es una lista
-
-        # Obtener nuevos datos del superInscrito (ya es una lista de inscripciones)
-        nuevos_datos = json.loads(str(superInscri))  # new_data es una lista
-
-        # Combinar listas (sin anidar)
-        datos_existentes += nuevos_datos  # Usamos += en lugar de extend() para claridad
-
-        # Guardar la lista combinada
-        with open(ruta, "w", encoding="utf-8") as file:
-            json.dump(datos_existentes, file, indent=4, ensure_ascii=False)
-    else:
-        print(f"Creando el archivo {ruta}...")
-        # Obtener datos iniciales (ya es una lista de inscripciones)
-        new_data = json.loads(str(superInscri))
-
-        # Guardar directamente la lista (sin envolver en otra lista)
-        with open(ruta, "w", encoding="utf-8") as file:
-            json.dump(new_data, file, indent=4, ensure_ascii=False)
+    superInscri.crear_json(ruta, superInscri)
 
     print(f"Se guardaron los datos en {ruta}")
 
@@ -133,24 +100,10 @@ if __name__ == "__main__":
 
     print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
 
-
-
     # Leer el archivo y guardar su contenido en datos_json
 
-    with open(ruta, "r", encoding="utf-8") as archivo:
-        datos_json = archivo.read()
-        print(superInscri)
+    superInscri.leer_json(ruta)
 
-
-    print(superInscri)
-
-    """ print("comenzar a guardar")
-        with open(ruta, "r") as file:
-            data = json.load(file)
-        data = data.append(superInscri)
-        with open(ruta, "w") as file:
-            json.dump(data, file, indent=4, ensure_ascii=False)
-            """
 
 
 

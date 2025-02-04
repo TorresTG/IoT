@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="añadido leer json">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curso.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curso.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Estudiante.py" beforeDir="false" afterPath="$PROJECT_DIR$/Estudiante.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.json" beforeDir="false" afterPath="$PROJECT_DIR$/a.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738211436415</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="añadido leer json">
+      <option name="closed" value="true" />
+      <created>1738532205774</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738532205774</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

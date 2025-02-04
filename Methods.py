@@ -1,8 +1,5 @@
 import json
 import os
-documents_path = os.path.expanduser("~/Documents")
-base_name = "inscrito"
-extension = ".json"
 
 class Methods:
 
@@ -31,13 +28,28 @@ class Methods:
             else:
                 print(f"{x},")
 
-    def jsonObject(self, Clase_a_guardar):
-        counter = 1
-        file_path = "/Users/torres/Documents/inscrito.json"
 
-        with open(file_path, "w") as file:
-            file.write(str(Clase_a_guardar))
-        print(f"El archivo se guardara en: {file_path}")
-        return file_path
+    def crear_json(self, ruta, clase_a_guardar):
+        if os.path.exists(ruta):
+            print(f"Actualizando el archivo {ruta}...")
 
+            with open(ruta, "r") as file:
+                datos_existentes = json.load(file)
+
+            nuevos_datos = json.loads(str(clase_a_guardar))
+
+            datos_existentes += nuevos_datos
+
+            with open(ruta, "w") as file:
+                json.dump(datos_existentes, file, indent=4, ensure_ascii=False)
+        else:
+            print(f"Creando archivo en la ruta {ruta}")
+            new_data = json.loads(str(clase_a_guardar))
+            with open(ruta, "w") as file:
+                json.dump(new_data, file, indent=4, ensure_ascii=False)
+
+    def leer_json(self, ruta):
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            datos_json = archivo.read()
+            print(datos_json)
 

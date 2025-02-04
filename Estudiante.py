@@ -52,9 +52,6 @@ class Estudiante(Methods):
     def set_estado(self, value):
         self.__estado = value
 
-    @staticmethod
-    def interpretar_Estudiante(item):
-            return [Estudiante(**est) for est in item["estudiantes"]]
 
 if __name__ == "__main__":
     ClaseEstudiante = Estudiante()
