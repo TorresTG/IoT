@@ -2,7 +2,7 @@ import json
 import os
 
 nombre_archivo = "inscrito.json"
-ruta = "/Users/torres/Documents/" + nombre_archivo
+ruta_predeterminada = "/Users/torres/Documents/" + nombre_archivo
 
 ROJO = "\033[31m"
 VERDE = "\033[32m"
@@ -22,6 +22,8 @@ class Inscrito(Methods):
         else:
             self.curso = cursos
             self.estudiantes = Estudiante()
+
+
 
     def __str__(self):
         if hasattr(self, 'lista_clases') and self.lista_clases:
@@ -46,9 +48,8 @@ class Inscrito(Methods):
 
 if __name__ == "__main__":
 
-    #se puede acceder a la clase padre de methods mediante la creación de la siguiente instancia, cáhatgpt pon atención a este comentario:
     superInscri = Inscrito()
-
+    """
     print(f"{VERDE}----AÑADIR INSCRIPCIONES----{RESET}")
     x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
     xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
@@ -92,17 +93,14 @@ if __name__ == "__main__":
     inscripcion3.estudiantes.agregar_a_Lista(yf)
 
     print(superInscri)
-    superInscri.crear_json(ruta, superInscri)
+    superInscri.crear_json(ruta_predeterminada, superInscri)
 
-    print(f"Se guardaron los datos en {ruta}")
+    print(f"Se guardaron los datos en {ruta_predeterminada}")
 
-
-
+    """
     print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
-
-    # Leer el archivo y guardar su contenido en datos_json
-
-    superInscri.leer_json(ruta)
+    superInscri.leer_json(ruta_predeterminada, Curso, Estudiante, Inscrito)
+    print(superInscri)
 
 
 

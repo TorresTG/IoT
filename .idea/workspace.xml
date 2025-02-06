@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="añadido leer json">
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="afinamiento">
+      <change afterPath="$PROJECT_DIR$/Usuario.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curso.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curso.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
     </list>
@@ -111,13 +113,22 @@
       <option name="project" value="LOCAL" />
       <updated>1738532205774</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="afinamiento">
+      <option name="closed" value="true" />
+      <created>1738679970553</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738679970553</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="añadidos indices" />
     <MESSAGE value="añadido lo de guardar el archivo" />
     <MESSAGE value="añadido leer json" />
-    <option name="LAST_COMMIT_MESSAGE" value="añadido leer json" />
+    <MESSAGE value="afinamiento" />
+    <option name="LAST_COMMIT_MESSAGE" value="afinamiento" />
   </component>
 </project>

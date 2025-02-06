@@ -30,6 +30,7 @@ class Curso(Methods):
         return json.dumps(datos, indent=4, ensure_ascii=False)
 
 
+
     @property
     def nombre(self):
         return self.__nombre

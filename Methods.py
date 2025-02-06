@@ -6,6 +6,10 @@ class Methods:
     def __init__(self):
         self.lista_clases = []
 
+    @property
+    def lista(self):
+        return self.lista_clases
+
     def agregar_a_Lista(self, clase):
         self.lista_clases.append(clase)
 
@@ -48,8 +52,20 @@ class Methods:
             with open(ruta, "w") as file:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
-    def leer_json(self, ruta):
+    def leer_json(self, ruta, Curso, Estudiante, Inscrito):
         with open(ruta, "r", encoding="utf-8") as archivo:
-            datos_json = archivo.read()
-            print(datos_json)
+            datos_json = json.load(archivo)
 
+            for objeto in datos_json:
+                unCurso = objeto.get("curso")
+                if not unCurso:
+                    continue
+                x = Curso(**unCurso)
+                inscripcion = Inscrito(x)
+
+                estudiantes = objeto.get("estudiantes", [])
+                estudiantes_Convertido = [Estudiante(**unicoEstudiante) for unicoEstudiante in estudiantes]
+                for xa in estudiantes_Convertido:
+                    inscripcion.estudiantes.agregar_a_Lista(xa)
+
+                self.agregar_a_Lista(inscripcion)
