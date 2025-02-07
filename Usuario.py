@@ -1,9 +1,9 @@
 from Inscrito import Inscrito
-from Inscrito import ruta_predeterminada
 from Inscrito import VERDE
 from Inscrito import AMARILLO
 from Inscrito import ROJO
 from Inscrito import RESET
+
 
 ciclo = True
 while ciclo is True:

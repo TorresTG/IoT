@@ -2,7 +2,7 @@ import json
 import os
 
 nombre_archivo = "inscrito.json"
-ruta_predeterminada = "/Users/torres/Documents/" + nombre_archivo
+ruta_predeterminadaIns= "/Users/torres/Documents/pruebas_python/" + nombre_archivo
 
 ROJO = "\033[31m"
 VERDE = "\033[32m"
@@ -93,13 +93,14 @@ if __name__ == "__main__":
     inscripcion3.estudiantes.agregar_a_Lista(yf)
 
     print(superInscri)
-    superInscri.crear_json(ruta_predeterminada, superInscri)
+    superInscri.crear_json(ruta_predeterminadaIns, superInscri)
 
-    print(f"Se guardaron los datos en {ruta_predeterminada}")
-
+    print(f"Se guardaron los datos en {ruta_predeterminadaIns}")
     """
+
     print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
-    superInscri.leer_json(ruta_predeterminada, Curso, Estudiante, Inscrito)
+    superInscri.leer_json(ruta_predeterminadaIns, Curso, Estudiante, Inscrito)
+
     print(superInscri)
 
 

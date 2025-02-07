@@ -22,11 +22,15 @@ class Estudiante(Methods):
             self.__estado = estado
 
     def __str__(self):
-        datos = {
-            key.replace(f"_{self.__class__.__name__}__", ""): value
-            for key, value in self.__dict__.items()
-        }
-        return json.dumps(datos, indent=4, ensure_ascii=False)
+        if hasattr(self, 'lista_clases') and self.lista_clases:
+            estudiantes_data = [json.loads(str(estudiante)) for estudiante in self.lista_clases]
+            return json.dumps(estudiantes_data, indent=4, ensure_ascii=False)
+        else:
+            datos = {
+                key.replace(f"_{self.__class__.__name__}__", ""): value
+                for key, value in self.__dict__.items()
+            }
+            return json.dumps(datos, indent=4, ensure_ascii=False)
 
 
     @property
@@ -64,12 +68,12 @@ if __name__ == "__main__":
     print(f"{VERDE}----POST AGREGAR ESTUDIANTE----{RESET}")
     ClaseEstudiante.agregar_a_Lista(x)
     ClaseEstudiante.agregar_a_Lista(y)
-    ClaseEstudiante.mostrar_Lista()
+    print(ClaseEstudiante)
     print("")
 
     print(f"{ROJO}----POST ELIMINAR ESTUDIANTE----{RESET}")
     ClaseEstudiante.eliminar_a_Lista(1)
-    ClaseEstudiante.mostrar_Lista()
+    print(ClaseEstudiante)
     print("")
 
     print(f"{AMARILLO}----POST EDITAR ESTUDIANTE----{RESET}")
@@ -77,4 +81,4 @@ if __name__ == "__main__":
               "8716764502", "eduardo@gmail.com", "Muelto")
 
     ClaseEstudiante.editar_a_Lista(0, a)
-    ClaseEstudiante.mostrar_Lista()
+    print(ClaseEstudiante)

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="afinamiento">
-      <change afterPath="$PROJECT_DIR$/Usuario.py" afterDir="false" />
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="todo listo, ahora falta la consola">
+      <change afterPath="$PROJECT_DIR$/UsersInteraction/InputEstudiante.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Curso.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curso.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Usuario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicio 1" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +51,7 @@
   &quot;keyToString&quot;: {
     &quot;Python.Curso.executor&quot;: &quot;Run&quot;,
     &quot;Python.Estudiante.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputEstudiante.executor&quot;: &quot;Run&quot;,
     &quot;Python.Inscrito.executor&quot;: &quot;Run&quot;,
     &quot;Python.Methods.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -121,14 +123,34 @@
       <option name="project" value="LOCAL" />
       <updated>1738679970553</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="todo listo, ahora falta la consola">
+      <option name="closed" value="true" />
+      <created>1738816862949</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738816862949</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="añadidos indices" />
     <MESSAGE value="añadido lo de guardar el archivo" />
     <MESSAGE value="añadido leer json" />
     <MESSAGE value="afinamiento" />
-    <option name="LAST_COMMIT_MESSAGE" value="afinamiento" />
+    <MESSAGE value="todo listo, ahora falta la consola" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo listo, ahora falta la consola" />
   </component>
 </project>
