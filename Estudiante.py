@@ -57,6 +57,8 @@ class Estudiante(Methods):
         self.__estado = value
 
 
+
+
 if __name__ == "__main__":
     ClaseEstudiante = Estudiante()
     x = Estudiante("Matias", 2,

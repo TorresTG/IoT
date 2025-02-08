@@ -1,6 +1,7 @@
 import json
 import os
 
+
 class Methods:
 
     def __init__(self):
@@ -32,7 +33,6 @@ class Methods:
             else:
                 print(f"{x},")
 
-
     def crear_json(self, ruta, clase_a_guardar):
         if os.path.exists(ruta):
             print(f"Actualizando el archivo {ruta}...")
@@ -52,36 +52,39 @@ class Methods:
             with open(ruta, "w") as file:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
-
-    #hacer que este metodo obtenga los elementos de curso.json, inscrito.json y estudiante.json para dividir la lectura
-    #de la inserccion de datos
-    def busqueda_json(self,ruta, Curso = None, Estudiante = None, Inscrito = None):
+    # hacer que este metodo obtenga los elementos de curso.json, inscrito.json y estudiante.json para dividir la lectura
+    # de la inserccion de datos
+    def leer_datos(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
         if os.path.exists(ruta):
             with open(ruta, "r", encoding="utf-8") as archivo:
                 datos_json = json.load(archivo)
                 lista_temporal = []
-                if  ((Curso or Inscrito) is None) and (Estudiante is not None):
+                if ((Curso or Inscrito) is None) and (Estudiante is not None):
                     for x in datos_json:
                         lista_temporal.append(x)
-                    return json.dumps(lista_temporal, indent=4, ensure_ascii=False)
-
-
-                """elif ((Estudiante or Inscrito) is None) and (Curso is not None):
-                elif (Curso and Estudiante and Inscrito) is not None:
-                    pass
-                else:
-                    return json.dumps(lista_temporal, indent=4, ensure_ascii=False)"""
+                    return lista_temporal
         else:
             print(f"Creando archivo en la ruta {ruta}")
             new_data = []
             with open(ruta, "w") as file:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
+    def obtencion(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
+        data = self.leer_datos(ruta, Curso, Estudiante, Inscrito)
+        for item in data:
+            instance = Estudiante(**item)
+            self.agregar_a_Lista(instance)
 
-    def prueba1(self,ruta, Curso = None, Estudiante = None, Inscrito = None):
-        self.agregar_a_Lista(self.busqueda_json(ruta, Estudiante))
+    def depositar_datos(self, ruta):
+        if os.path.exists(ruta):
+            lista_a_guardar = [json.loads(str(estudiante)) for estudiante in self.lista_clases]
+            # Abrimos (o creamos) el archivo en modo escritura y volcamos la lista en formato JSON
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                json.dump(lista_a_guardar, archivo, indent=4, ensure_ascii=False)
 
+            print(f"Datos guardados correctamente en {ruta}")
 
+    """
     def leer_json(self, ruta, Curso, Estudiante, Inscrito):
         with open(ruta, "r", encoding="utf-8") as archivo:
             datos_json = json.load(archivo)
@@ -99,4 +102,4 @@ class Methods:
                     inscripcion.estudiantes.agregar_a_Lista(xa)
 
                 self.agregar_a_Lista(inscripcion)
-
+    """
