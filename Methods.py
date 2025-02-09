@@ -63,6 +63,10 @@ class Methods:
                     for x in datos_json:
                         lista_temporal.append(x)
                     return lista_temporal
+                if ((Estudiante or Inscrito) is None) and (Curso is not None):
+                    for x in datos_json:
+                        lista_temporal.append(x)
+                    return lista_temporal
         else:
             print(f"Creando archivo en la ruta {ruta}")
             new_data = []
@@ -70,15 +74,20 @@ class Methods:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
     def obtencion(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
+        instance = None
         data = self.leer_datos(ruta, Curso, Estudiante, Inscrito)
         for item in data:
-            instance = Estudiante(**item)
+            if Curso is not None:
+                instance = Curso(**item)
+            if Estudiante is not None:
+                instance = Estudiante(**item)
+            if Inscrito is not None:
+                instance = Inscrito(**item)
             self.agregar_a_Lista(instance)
 
     def depositar_datos(self, ruta):
         if os.path.exists(ruta):
-            lista_a_guardar = [json.loads(str(estudiante)) for estudiante in self.lista_clases]
-            # Abrimos (o creamos) el archivo en modo escritura y volcamos la lista en formato JSON
+            lista_a_guardar = [json.loads(str(objeto)) for objeto in self.lista_clases]
             with open(ruta, "w", encoding="utf-8") as archivo:
                 json.dump(lista_a_guardar, archivo, indent=4, ensure_ascii=False)
 
