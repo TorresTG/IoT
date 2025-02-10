@@ -54,16 +54,16 @@ class Methods:
 
     # hacer que este metodo obtenga los elementos de curso.json, inscrito.json y estudiante.json para dividir la lectura
     # de la inserccion de datos
-    def leer_datos(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
+    def leer_datos(self, ruta, c=False, e=False, i=False):
         if os.path.exists(ruta):
             with open(ruta, "r", encoding="utf-8") as archivo:
                 datos_json = json.load(archivo)
                 lista_temporal = []
-                if ((Curso or Inscrito) is None) and (Estudiante is not None):
+                if ((c or i) is False) and (e is not True):
                     for x in datos_json:
                         lista_temporal.append(x)
                     return lista_temporal
-                if ((Estudiante or Inscrito) is None) and (Curso is not None):
+                if ((e or i) is False) and (c is not True):
                     for x in datos_json:
                         lista_temporal.append(x)
                     return lista_temporal

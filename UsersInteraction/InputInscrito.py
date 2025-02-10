@@ -58,7 +58,8 @@ class InputInscrito:
             if opcion == '1':
                 Cur = InputMaestro(True, "Curso", ["nombre", "grado", "seccion", "salon", "descripcion"],
                                       Curso, "/Users/torres/Documents/pruebas_python/CursoInput.json")
-                Cur.empezar_la_matanga()
+                x = Cur.empezar_la_matanga()
+                print(x)
             elif opcion == '2':
                 Estu = InputMaestro(True, "Estudiante", ["nombre", "edad", "telefono", "email", "estado"],
                                    Estudiante, "/Users/torres/Documents/pruebas_python/EstudianteInput.json")

@@ -105,6 +105,9 @@ if __name__ =="__main__":
     ClaseCurso.editar_a_Lista(0, a)
     ClaseCurso.editar_a_Lista(1, b)
     print(ClaseCurso)
-
+    print("----")
+    ClaseCurso.eliminar_a_Lista(1)
+    ClaseCurso.eliminar_a_Lista(0)
+    print(ClaseCurso)
 
 

@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="todo listo, ahora falta la consola">
-      <change afterPath="$PROJECT_DIR$/UsersInteraction/InputEstudiante.py" afterDir="false" />
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="intento de avanze">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Curso.py" beforeDir="false" afterPath="$PROJECT_DIR$/Curso.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Usuario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ejercicio 1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputCurso.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputCurso.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputMaestro.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputMaestro.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +43,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2s5gL4VrnRHKoZCMp3g7M56z1BA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,9 +54,13 @@
   &quot;keyToString&quot;: {
     &quot;Python.Curso.executor&quot;: &quot;Run&quot;,
     &quot;Python.Estudiante.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputCurso.executor&quot;: &quot;Run&quot;,
     &quot;Python.InputEstudiante.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputInscrito.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputMaestro.executor&quot;: &quot;Run&quot;,
     &quot;Python.Inscrito.executor&quot;: &quot;Run&quot;,
     &quot;Python.Methods.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Usuario.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;
@@ -131,7 +138,39 @@
       <option name="project" value="LOCAL" />
       <updated>1738816862949</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="por ahora bien">
+      <option name="closed" value="true" />
+      <created>1738952759746</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738952759746</updated>
+    </task>
+    <task id="LOCAL-00009" summary="consola InputEstudiante.py terminada">
+      <option name="closed" value="true" />
+      <created>1739056855390</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1739056855390</updated>
+    </task>
+    <task id="LOCAL-00010" summary="estudiantes y Cursos funcionales">
+      <option name="closed" value="true" />
+      <created>1739061051170</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739061051170</updated>
+    </task>
+    <task id="LOCAL-00011" summary="intento de avanze">
+      <option name="closed" value="true" />
+      <created>1739082309326</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739082309326</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +190,10 @@
     <MESSAGE value="añadido leer json" />
     <MESSAGE value="afinamiento" />
     <MESSAGE value="todo listo, ahora falta la consola" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo listo, ahora falta la consola" />
+    <MESSAGE value="por ahora bien" />
+    <MESSAGE value="consola InputEstudiante.py terminada" />
+    <MESSAGE value="estudiantes y Cursos funcionales" />
+    <MESSAGE value="intento de avanze" />
+    <option name="LAST_COMMIT_MESSAGE" value="intento de avanze" />
   </component>
 </project>
