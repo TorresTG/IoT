@@ -35,6 +35,15 @@ class Curso(Methods):
             }
             return json.dumps(datos, indent=4, ensure_ascii=False)
 
+    def to_dict(self):
+        return {
+            "nombre": self.__nombre,
+            "grado": self.__grado,
+            "seccion": self.__seccion,
+            "salon": self.__salon,
+            "descripcion": self.__descripcion
+        }
+
 
 
     @property

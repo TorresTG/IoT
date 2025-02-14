@@ -32,6 +32,15 @@ class Estudiante(Methods):
             }
             return json.dumps(datos, indent=4, ensure_ascii=False)
 
+    def to_dict(self):
+        return {
+            "nombre": self.__nombre,
+            "edad": self.__edad,
+            "telefono": self.telefono,
+            "email": self.__email,
+            "estado": self.__estado
+        }
+
 
     @property
     def nombre(self):

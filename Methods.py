@@ -52,18 +52,19 @@ class Methods:
             with open(ruta, "w") as file:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
+
     # hacer que este metodo obtenga los elementos de curso.json, inscrito.json y estudiante.json para dividir la lectura
     # de la inserccion de datos
-    def leer_datos(self, ruta, c=False, e=False, i=False):
+    def leer_datos(self, ruta, Curso=None, Estudiante=None, Inscrito=None,):
         if os.path.exists(ruta):
             with open(ruta, "r", encoding="utf-8") as archivo:
                 datos_json = json.load(archivo)
                 lista_temporal = []
-                if ((c or i) is False) and (e is not True):
+                if Curso is None and Estudiante is not None:
                     for x in datos_json:
                         lista_temporal.append(x)
                     return lista_temporal
-                if ((e or i) is False) and (c is not True):
+                if Estudiante is None and Curso is not None:
                     for x in datos_json:
                         lista_temporal.append(x)
                     return lista_temporal
@@ -75,7 +76,7 @@ class Methods:
 
     def obtencion(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
         instance = None
-        data = self.leer_datos(ruta, Curso, Estudiante, Inscrito)
+        data = self.leer_datos(ruta, Curso, Estudiante)
         for item in data:
             if Curso is not None:
                 instance = Curso(**item)
@@ -87,11 +88,10 @@ class Methods:
 
     def depositar_datos(self, ruta):
         if os.path.exists(ruta):
-            lista_a_guardar = [json.loads(str(objeto)) for objeto in self.lista_clases]
+            lista_a_guardar = [objeto.to_dict() for objeto in self.lista_clases]
             with open(ruta, "w", encoding="utf-8") as archivo:
                 json.dump(lista_a_guardar, archivo, indent=4, ensure_ascii=False)
-
-            print(f"Datos guardados correctamente en {ruta}")
+            print(f"Datos guardados en {ruta}")
 
     """
     def leer_json(self, ruta, Curso, Estudiante, Inscrito):

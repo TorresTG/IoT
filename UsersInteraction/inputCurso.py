@@ -12,21 +12,19 @@ class InputCurso:
 
     def __init__(self, ciclo=True, superCurso=None):
         self.__ciclo = ciclo
-        if superCurso is None: #NO QUITAR ESTE IF BAJO NINGUN MOTIVOOOOO
-            self.inicializacion()
+        if superCurso is None:
+            self.superCurso = Curso()
+            if os.path.exists(ruta_predeterCurs):
+                print("añadiendo curso...")
+                self.superCurso.obtencion(ruta_predeterCurs, Curso, None, None)
+            else:
+                print("no se a encontrado ningun estudiante por el momento y se encuentra vacio a la espera de datos")
+                self.superCurso.crear_json(ruta_predeterCurs, [])
         else:
             self.superCurso = superCurso
-
-
-    def inicializacion(self):
-        if os.path.exists(ruta_predeterCurs):
-            print("añadiendo curso...")
-            self.superCurso.obtencion(ruta_predeterCurs, True, False, False)
-            print(self.superCurso)
-        else:
-            print("no se a encontrado ningun estudiante por el momento y se encuentra vacio a la espera de datos")
-            self.superCurso.crear_json(ruta_predeterCurs, [])
-
+            self.superCurso.depositar_datos(ruta_predeterCurs) # esto debe de ir?
+            # con esto se obtiene los datos del curso insertado y los guarda sobreescribiendo lo que haya en el json
+        print(self.superCurso)
 
     @property
     def ciclo(self):
@@ -81,7 +79,6 @@ class InputCurso:
         self.superCurso.agregar_a_Lista(x)
         self.actualizar_json()
 
-
     def editar_Curso(self):
         index = self.verificacion()
         if index is not False:
@@ -90,7 +87,6 @@ class InputCurso:
             self.superCurso.editar_a_Lista(index, x)
             self.superCurso.depositar_datos(ruta_predeterCurs)
             self.actualizar_json()
-
 
     def eliminar_Curso(self):
         index = self.verificacion()
@@ -130,6 +126,21 @@ class InputCurso:
                 print("ingrese un numero dentro del rango de 1 - 5")
         print("se cerro el programa")
 
+if __name__ == "__main__":
 
-inputs2 = InputCurso()
-inputs2.empezarLaMatanga()
+    ClaseCurso = Curso()
+    """
+    x = Curso("matematicas", 5,
+              "A", "salon 17", "se ensenan formulas basicas")
+
+    y = Curso("geologia", 6,
+              "B", "salon 22", "se miran las gemas")
+
+    z = Curso("espanol", 3,
+              "A", "salon 4", "se estudia el lenguaje")
+    ClaseCurso.agregar_a_Lista(x)
+    ClaseCurso.agregar_a_Lista(y)
+    ClaseCurso.agregar_a_Lista(z)"""
+
+    inputs2 = InputCurso(True, ClaseCurso)
+    inputs2.empezarLaMatanga()

@@ -43,6 +43,12 @@ class Inscrito(Methods):
             }
             return json.dumps(inscripcion_data, indent=4, ensure_ascii=False)
 
+    def to_dict(self):
+        return {
+            "curso": self.curso.to_dict() if self.curso else {},
+            "estudiantes": [estudiante.to_dict() for estudiante in self.estudiantes.lista_clases] if self.estudiantes else []
+        }
+
 
 
 
@@ -96,6 +102,16 @@ if __name__ == "__main__":
     superInscri.crear_json(ruta_predeterminadaIns, superInscri)
 
     print(f"Se guardaron los datos en {ruta_predeterminadaIns}")
+    
+    
+    ejemplo:
+    
+    x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
+    xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
+    
+    
+    inscripcion1 = Inscrito(x)
+    inscripcion1.estudiantes.agregar_a_Lista(xa)
     """
 
     print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
