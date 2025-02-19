@@ -10,8 +10,9 @@ from Inscrito import VERDE, AMARILLO, ROJO, RESET
 
 class InputEstudiante:
 
-    def __init__(self, ciclo=True, superEstudiante=None):
-        self.__ciclo = ciclo
+    def __init__(self, superEstudiante=None):
+        self.__ciclo = True
+        self.claseEnviada = True
         if superEstudiante is None:
             self.superEstudiante = Estudiante()
             if os.path.exists(ruta_predeterEstu):
@@ -21,8 +22,9 @@ class InputEstudiante:
                 print("no se a encontrado ningun estudiante por el momento y se encuentra vacio a la espera de datos")
                 self.superEstudiante.crear_json(ruta_predeterEstu, [])
         else:
+            print("obteniendo datos de la clase mandada")
             self.superEstudiante = superEstudiante
-            self.superEstudiante.depositar_datos(ruta_predeterEstu) # esto debe de ir?
+            self.claseEnviada = False
             # con esto se obtiene los datos del Estudiante insertado y los guarda sobreescribiendo lo que haya en el json
         print(self.superEstudiante)
 
@@ -77,7 +79,8 @@ class InputEstudiante:
         datos = self.recibir_inputs()
         x = Estudiante(**datos)
         self.superEstudiante.agregar_a_Lista(x)
-        self.actualizar_json()
+        if self.claseEnviada:
+            self.actualizar_json()
 
     def editar_Estudiante(self):
         index = self.verificacion()
@@ -85,15 +88,15 @@ class InputEstudiante:
             datos = self.recibir_inputs()
             x = Estudiante(**datos)
             self.superEstudiante.editar_a_Lista(index, x)
-            self.superEstudiante.depositar_datos(ruta_predeterEstu)
-            self.actualizar_json()
+            if self.claseEnviada:
+                self.actualizar_json()
 
     def eliminar_Estudiante(self):
         index = self.verificacion()
         if index is not False:
             self.superEstudiante.eliminar_a_Lista(index)
-            self.superEstudiante.depositar_datos(ruta_predeterEstu)
-            self.actualizar_json()
+            if self.claseEnviada:
+                self.actualizar_json()
 
     def ver_Estudiante(self):
         print(self.superEstudiante)
@@ -125,16 +128,18 @@ class InputEstudiante:
             else:
                 print("ingrese un numero dentro del rango de 1 - 5")
         print("se cerro el programa")
+        return self.superEstudiante.lista_clases
 
 if __name__ == "__main__":
     estudiante = Estudiante()
-
+    """
     x = Estudiante("Matias", 2,
                    "8716764502", "tobias@gmail.com", "Vivo")
 
     y = Estudiante("noa", 19,
                    "8716608698", "23170106@uttcampus.com", "Muerto")
     estudiante.agregar_a_Lista(x)
-    estudiante.agregar_a_Lista(y)
-    inputs2 = InputEstudiante(True, estudiante)
+    estudiante.agregar_a_Lista(y)"""
+    #inputs2 = InputEstudiante(estudiante)
+    inputs2 = InputEstudiante()
     inputs2.empezarLaMatanga()

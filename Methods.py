@@ -58,16 +58,7 @@ class Methods:
     def leer_datos(self, ruta, Curso=None, Estudiante=None, Inscrito=None,):
         if os.path.exists(ruta):
             with open(ruta, "r", encoding="utf-8") as archivo:
-                datos_json = json.load(archivo)
-                lista_temporal = []
-                if Curso is None and Estudiante is not None:
-                    for x in datos_json:
-                        lista_temporal.append(x)
-                    return lista_temporal
-                if Estudiante is None and Curso is not None:
-                    for x in datos_json:
-                        lista_temporal.append(x)
-                    return lista_temporal
+                return json.load(archivo)
         else:
             print(f"Creando archivo en la ruta {ruta}")
             new_data = []
@@ -76,15 +67,34 @@ class Methods:
 
     def obtencion(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
         instance = None
-        data = self.leer_datos(ruta, Curso, Estudiante)
-        for item in data:
-            if Curso is not None:
-                instance = Curso(**item)
-            if Estudiante is not None:
-                instance = Estudiante(**item)
-            if Inscrito is not None:
-                instance = Inscrito(**item)
-            self.agregar_a_Lista(instance)
+        data = self.leer_datos(ruta, Curso, Estudiante, Inscrito)
+        if Inscrito is None:
+            for item in data:
+                if Curso is not None:
+                    instance = Curso(**item)
+                if Estudiante is not None:
+                    instance = Estudiante(**item)
+
+                self.agregar_a_Lista(instance)
+
+        else:
+            for objeto in data:
+                # Reconstruir el Curso
+                curso_data = objeto.get("curso", {})
+                curso = Curso(**curso_data) if curso_data else None
+
+                # Crear Inscrito con el Curso
+                inscripcion = Inscrito(curso)
+
+                # Reconstruir Estudiantes
+                estudiantes_data = objeto.get("estudiantes", [])
+                for est_data in estudiantes_data:
+                    estudiante = Estudiante(**est_data)
+                    inscripcion.estudiantes.agregar_a_Lista(estudiante)
+
+                self.agregar_a_Lista(inscripcion)
+
+
 
     def depositar_datos(self, ruta):
         if os.path.exists(ruta):
@@ -94,6 +104,14 @@ class Methods:
             print(f"Datos guardados en {ruta}")
 
     """
+        def depositar_datos(self, ruta):
+        if os.path.exists(ruta):
+            lista_a_guardar = [json.loads(str(objeto)) for objeto in self.lista_clases]
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                json.dump(lista_a_guardar, archivo, indent=4, ensure_ascii=False)
+            print(f"Datos guardados correctamente en {ruta}")
+    
+    
     def leer_json(self, ruta, Curso, Estudiante, Inscrito):
         with open(ruta, "r", encoding="utf-8") as archivo:
             datos_json = json.load(archivo)

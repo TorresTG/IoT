@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="empezar desde aqui, es IMPORTANTE el if de inputCurso">
-      <change afterPath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" afterDir="false" />
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="no se que hacer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Estudiante.py" beforeDir="false" afterPath="$PROJECT_DIR$/Estudiante.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputCurso.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputCurso.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/inputCurso.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/inputCurso.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,23 +51,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Curso.executor": "Run",
-    "Python.Estudiante.executor": "Run",
-    "Python.InputCurso.executor": "Run",
-    "Python.InputEstudiante.executor": "Run",
-    "Python.InputInscrito.executor": "Run",
-    "Python.InputMaestro.executor": "Run",
-    "Python.Inscrito.executor": "Run",
-    "Python.Methods.executor": "Run",
-    "Python.Usuario.executor": "Run",
-    "Python.inputEstudiantes.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Curso.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Estudiante.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputCurso.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputEstudiante.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputInscrito.executor&quot;: &quot;Run&quot;,
+    &quot;Python.InputMaestro.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Inscrito.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Methods.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Usuario.executor&quot;: &quot;Run&quot;,
+    &quot;Python.inputCurso.executor&quot;: &quot;Run&quot;,
+    &quot;Python.inputEstudiantes.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -177,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739218936765</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="no se que hacer">
+      <option name="closed" value="true" />
+      <created>1739513119407</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739513119407</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +214,7 @@
     <MESSAGE value="estudiantes y Cursos funcionales" />
     <MESSAGE value="intento de avanze" />
     <MESSAGE value="empezar desde aqui, es IMPORTANTE el if de inputCurso" />
-    <option name="LAST_COMMIT_MESSAGE" value="empezar desde aqui, es IMPORTANTE el if de inputCurso" />
+    <MESSAGE value="no se que hacer" />
+    <option name="LAST_COMMIT_MESSAGE" value="no se que hacer" />
   </component>
 </project>

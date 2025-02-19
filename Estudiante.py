@@ -6,10 +6,6 @@ VERDE = "\033[32m"
 AMARILLO = "\033[33m"
 RESET = "\033[0m"
 
-
-
-
-
 class Estudiante(Methods):
     def __init__(self, nombre = None, edad = None, telefono = None, email = None, estado = None):
         if (nombre or edad or telefono or email or estado) is None:
@@ -36,7 +32,7 @@ class Estudiante(Methods):
         return {
             "nombre": self.__nombre,
             "edad": self.__edad,
-            "telefono": self.telefono,
+            "telefono": self.__telefono,
             "email": self.__email,
             "estado": self.__estado
         }
@@ -64,8 +60,6 @@ class Estudiante(Methods):
 
     def set_estado(self, value):
         self.__estado = value
-
-
 
 
 if __name__ == "__main__":

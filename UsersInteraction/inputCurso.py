@@ -10,8 +10,9 @@ from Inscrito import VERDE, AMARILLO, ROJO, RESET
 
 class InputCurso:
 
-    def __init__(self, ciclo=True, superCurso=None):
-        self.__ciclo = ciclo
+    def __init__(self, superCurso=None):
+        self.__ciclo = True
+        self.claseEnviada = True #se activa el guardado del json
         if superCurso is None:
             self.superCurso = Curso()
             if os.path.exists(ruta_predeterCurs):
@@ -21,8 +22,9 @@ class InputCurso:
                 print("no se a encontrado ningun estudiante por el momento y se encuentra vacio a la espera de datos")
                 self.superCurso.crear_json(ruta_predeterCurs, [])
         else:
+            print("obteniendo datos de la clase mandada")
             self.superCurso = superCurso
-            self.superCurso.depositar_datos(ruta_predeterCurs) # esto debe de ir?
+            self.claseEnviada = False # se desactiva el gurdado del json
             # con esto se obtiene los datos del curso insertado y los guarda sobreescribiendo lo que haya en el json
         print(self.superCurso)
 
@@ -44,7 +46,7 @@ class InputCurso:
 
     def actualizar_json(self):
         self.superCurso.depositar_datos(ruta_predeterCurs)
-        print("Se ha añadido el Curso")
+        print("Curso a recibido cambios")
         print("-------")
         print("")
 
@@ -77,7 +79,8 @@ class InputCurso:
         datos = self.recibir_inputs()
         x = Curso(**datos)
         self.superCurso.agregar_a_Lista(x)
-        self.actualizar_json()
+        if self.claseEnviada: #checa si se envio la clase en el constructor si acierta, guarda en el json
+            self.actualizar_json()
 
     def editar_Curso(self):
         index = self.verificacion()
@@ -85,15 +88,15 @@ class InputCurso:
             datos = self.recibir_inputs()
             x = Curso(**datos)
             self.superCurso.editar_a_Lista(index, x)
-            self.superCurso.depositar_datos(ruta_predeterCurs)
-            self.actualizar_json()
+            if self.claseEnviada:
+                self.actualizar_json()
 
     def eliminar_Curso(self):
         index = self.verificacion()
         if index is not False:
             self.superCurso.eliminar_a_Lista(index)
-            self.superCurso.depositar_datos(ruta_predeterCurs)
-            self.actualizar_json()
+            if self.claseEnviada:
+                self.actualizar_json()
 
     def ver_Curso(self):
         print(self.superCurso)
@@ -125,11 +128,12 @@ class InputCurso:
             else:
                 print("ingrese un numero dentro del rango de 1 - 5")
         print("se cerro el programa")
+        return self.superCurso
 
 if __name__ == "__main__":
 
     ClaseCurso = Curso()
-    """
+
     x = Curso("matematicas", 5,
               "A", "salon 17", "se ensenan formulas basicas")
 
@@ -140,7 +144,8 @@ if __name__ == "__main__":
               "A", "salon 4", "se estudia el lenguaje")
     ClaseCurso.agregar_a_Lista(x)
     ClaseCurso.agregar_a_Lista(y)
-    ClaseCurso.agregar_a_Lista(z)"""
+    ClaseCurso.agregar_a_Lista(z)
 
-    inputs2 = InputCurso(True, ClaseCurso)
-    inputs2.empezarLaMatanga()
+    #inputs1 = InputCurso(ClaseCurso)
+    inputs1 = InputCurso()
+    inputs1.empezarLaMatanga()

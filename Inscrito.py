@@ -27,11 +27,9 @@ class Inscrito(Methods):
 
     def __str__(self):
         if hasattr(self, 'lista_clases') and self.lista_clases:
-            # Caso contenedor: lista de inscripciones
             inscripciones_data = [json.loads(str(inscripcion)) for inscripcion in self.lista_clases]
             return json.dumps(inscripciones_data, indent=4, ensure_ascii=False)
         else:
-            # Caso inscripción individual
             curso_data = json.loads(str(self.curso)) if hasattr(self, 'curso') else None
             estudiantes_data = []
             if hasattr(self, 'estudiantes') and hasattr(self.estudiantes, 'lista_clases'):
@@ -55,7 +53,7 @@ class Inscrito(Methods):
 if __name__ == "__main__":
 
     superInscri = Inscrito()
-    """
+
     print(f"{VERDE}----AÑADIR INSCRIPCIONES----{RESET}")
     x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
     xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
@@ -103,21 +101,21 @@ if __name__ == "__main__":
 
     print(f"Se guardaron los datos en {ruta_predeterminadaIns}")
     
-    
-    ejemplo:
+
+    """ejemplo:
     
     x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
-    xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
-    
-    
+    xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")"""
+
+
     inscripcion1 = Inscrito(x)
     inscripcion1.estudiantes.agregar_a_Lista(xa)
-    """
 
-    print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
+
+    """print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
     superInscri.leer_json(ruta_predeterminadaIns, Curso, Estudiante, Inscrito)
 
-    print(superInscri)
+    print(superInscri)"""
 
 
 
