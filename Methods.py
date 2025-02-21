@@ -65,25 +65,17 @@ class Methods:
             with open(ruta, "w") as file:
                 json.dump(new_data, file, indent=4, ensure_ascii=False)
 
-    def obtencion(self, ruta, CursoCls=None, EstudianteCls=None, InscritoCls=None):
+    def obtencion(self, ruta, Curso=None, Estudiante=None, Inscrito=None):
         data = self.leer_datos(ruta)
         temp_list = []
-
-        if InscritoCls:
+        if Inscrito:
             for item in data:
-                # Reconstruir Curso
-                curso = CursoCls(**item["curso"]) if "curso" in item else None
-
-                # Crear Inscrito
-                insc = InscritoCls(curso)
-
-                # Reconstruir Estudiantes
+                curso = Curso(**item["curso"]) if "curso" in item else None
+                insc = Inscrito(curso)
                 for est_data in item.get("estudiantes", []):
-                    estudiante = EstudianteCls(**est_data)
+                    estudiante = Estudiante(**est_data)
                     insc.estudiantes.agregar_a_Lista(estudiante)
-
                 temp_list.append(insc)
-
         return temp_list
 
     def depositar_datos(self, ruta):

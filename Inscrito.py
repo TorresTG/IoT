@@ -106,11 +106,13 @@ if __name__ == "__main__":
     
     x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
     xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")"""
-
+    x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
+    xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
 
     inscripcion1 = Inscrito(x)
     inscripcion1.estudiantes.agregar_a_Lista(xa)
-
+    superInscri.agregar_a_Lista(inscripcion1)
+    print(superInscri)
 
     """print(f"\n{ROJO}----MOSTRAR DATOS DEL JSON----{RESET}")
     superInscri.leer_json(ruta_predeterminadaIns, Curso, Estudiante, Inscrito)

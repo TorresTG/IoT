@@ -128,7 +128,9 @@ class InputEstudiante:
             else:
                 print("ingrese un numero dentro del rango de 1 - 5")
         print("se cerro el programa")
-        return self.superEstudiante.lista_clases
+        r = self.superEstudiante.lista_clases
+        return r
+
 
 if __name__ == "__main__":
     estudiante = Estudiante()

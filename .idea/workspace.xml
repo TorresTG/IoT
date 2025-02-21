@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="bonito y funcional">
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="Funciona la parte que importa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Inscrito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739973285809</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Funciona la parte que importa">
+      <option name="closed" value="true" />
+      <created>1740115402018</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1740115402018</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,6 +259,7 @@
     <MESSAGE value="empezar desde aqui, es IMPORTANTE el if de inputCurso" />
     <MESSAGE value="no se que hacer" />
     <MESSAGE value="bonito y funcional" />
-    <option name="LAST_COMMIT_MESSAGE" value="bonito y funcional" />
+    <MESSAGE value="Funciona la parte que importa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funciona la parte que importa" />
   </component>
 </project>
