@@ -76,6 +76,14 @@ class Methods:
                     estudiante = Estudiante(**est_data)
                     insc.estudiantes.agregar_a_Lista(estudiante)
                 temp_list.append(insc)
+        elif Curso and not Inscrito:
+            for item in data:
+                curso = Curso(**item)
+                temp_list.append(curso)
+        elif Estudiante and not Inscrito:
+            for item in data:
+                estudiante = Estudiante(**item)
+                temp_list.append(estudiante)
         return temp_list
 
     def depositar_datos(self, ruta):

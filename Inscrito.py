@@ -7,6 +7,7 @@ ruta_predeterminadaIns= "/Users/torres/Documents/pruebas_python/" + nombre_archi
 ROJO = "\033[31m"
 VERDE = "\033[32m"
 AMARILLO = "\033[33m"
+MORADO = "\033[35m"
 RESET = "\033[0m"
 
 from Curso import Curso

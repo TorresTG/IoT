@@ -1,11 +1,10 @@
 import json
 import os
 
-from Inscrito import Inscrito, VERDE, AMARILLO, ROJO, RESET
+from Inscrito import Inscrito, VERDE, AMARILLO, ROJO, RESET, MORADO
 from Curso import Curso
 from Estudiante import Estudiante
 from UsersInteraction.inputEstudiantes import InputEstudiante
-
 from pymongo import MongoClient
 
 nombre_archivo = "InscritoInput.json"
@@ -23,8 +22,6 @@ class InputInscrito:
         self.superInscrito = Inscrito()
         self.internet = True
         self.estudiante = Estudiante()
-
-
         if superInscrito is None:
             if os.path.exists(ruta_predeterInsc):
                 print("Cargando inscripciones principales...")
@@ -36,7 +33,7 @@ class InputInscrito:
             self.claseEnviada = True
             self.superInscrito.agregar_a_Lista(superInscrito)
 
-        if self.claseEnviada == False:
+        if not self.claseEnviada:
             if not os.path.exists(ruta_update):
                 print("creando archivo temporal...")
                 self.superInscrito.crear_json(ruta_update, [])
@@ -50,12 +47,6 @@ class InputInscrito:
             print("Aviso: Se ha omitido el guardado de la clase en la DB y el Local")
         print(self.superInscrito)
 
-    """
-    if self.claseEnviada == False:
-    else:
-        print("Aviso: Se ha omitido el guardado de la clase en la DB y el Local")
-        
-        """
     @property
     def ciclo(self):
         return self.__ciclo
@@ -160,18 +151,16 @@ class InputInscrito:
     def agregar(self):
         datos = self.recibir_inputs()
         nueva_inscripcion = Inscrito(datos["curso"])
-
         # Agregar estudiantes
         for estu in datos["estudiantes"]:
             nueva_inscripcion.estudiantes.agregar_a_Lista(estu)
         self.superInscrito.agregar_a_Lista(nueva_inscripcion)
         # Guardar en JSON principal siempre
-        if self.claseEnviada == False:
-
+        if not self.claseEnviada:
             self.superInscrito.depositar_datos(ruta_predeterInsc)
             print(self.superInscrito)
             self.coleccion = self.coneccion_db()
-            if self.coleccion != None:
+            if self.coleccion is not None:
                 self.coleccion.insert_one(nueva_inscripcion.to_dict())
                 print("Enviado a MongoDB correctamente")
             else:
@@ -200,7 +189,7 @@ class InputInscrito:
         index = self.verificacion()
         if index is not False:
             self.superInscrito.eliminar_a_Lista(index)
-            if self.claseEnviada == False:
+            if not self.claseEnviada:
                 self.actualizar()
             else:
                 print("Aviso: Se ha omitido el guardado de la clase en la DB y el Local")
@@ -213,7 +202,7 @@ class InputInscrito:
 
     def empezarLaMatanga(self):
         while self.ciclo is True:
-            print(f"--------Gestion De Inscrito--------")
+            print(f"--------{MORADO}Gestion De Inscrito{RESET}--------")
             print(f"{VERDE}1). Agregar Inscrito{RESET}")
             print(f"{AMARILLO}2). Editar Inscrito{RESET}")
             print(f"{ROJO}3). Eliminar Inscrito{RESET}")
@@ -254,6 +243,6 @@ if __name__ == "__main__":
 
     inscripcion1 = Inscrito(x)
     inscripcion1.estudiantes.agregar_a_Lista(xa)
-    inputs2 = InputInscrito(inscripcion1)
-    #inputs2 = InputInscrito()
+    #inputs2 = InputInscrito(inscripcion1)
+    inputs2 = InputInscrito()
     inputs2.empezarLaMatanga()
