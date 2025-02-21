@@ -1,3 +1,4 @@
+import json
 import os
 
 from Inscrito import Inscrito, VERDE, AMARILLO, ROJO, RESET
@@ -5,27 +6,33 @@ from Curso import Curso
 from Estudiante import Estudiante
 from UsersInteraction.inputEstudiantes import InputEstudiante
 
+from pymongo import MongoClient
+
+
 nombre_archivo = "InscritoInput.json"
 ruta_predeterInsc = "/Users/torres/Documents/pruebas_python/" + nombre_archivo
+nombre_archivo = "updateInscrito.json"
+ruta_update = "/Users/torres/Documents/pruebas_python/" + nombre_archivo
 
 class InputInscrito:
 
     def __init__(self, superInscrito=None):
         self.__ciclo = True
         self.claseEnviada = True
+        self.superInscrito = Inscrito()
         if superInscrito is None:
-            self.superInscrito = Inscrito()
             if os.path.exists(ruta_predeterInsc):
-                print("añadiendo Inscritos...")
-                self.superInscrito.obtencion(ruta_predeterInsc, Curso, Estudiante, Inscrito)
+                print("Cargando inscripciones principales...")
+                self.superInscrito.lista_clases = self.superInscrito.obtencion(ruta_predeterInsc, Curso, Estudiante, Inscrito)
             else:
-                print("no se a encontrado ningun inscrito por el momento y se encuentra vacio a la espera de datos")
-                self.superInscrito.crear_json(ruta_predeterInsc, [])# arreglar esto
+                self.superInscrito.crear_json(ruta_predeterInsc, [])
         else:
-            print("obteniendo datos de la clase mandada")
             self.superInscrito = superInscrito
-            self.claseEnviada = False
-            # con esto se obtiene los datos del Inscrito insertado y los guarda sobreescribiendo lo que haya en el json
+        self.coleccion = self.coneccion_db()  # Intenta conectar y envía datos pendientes
+
+        # Preparar archivo temporal si no existe
+        if not os.path.exists(ruta_update):
+            self.superInscrito.crear_json(ruta_update, [])
         print(self.superInscrito)
 
     @property
@@ -34,6 +41,24 @@ class InputInscrito:
 
     def set_ciclo(self, value):
         self.__ciclo = value
+
+    def coneccion_db(self):
+        try:
+            MONGO_URI = "mongodb+srv://Mac-Tobi:04477369@myatlasclusteredu.qenui.mongodb.net/?authSource=admin"
+            client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+            db = client["python"]
+            print("Conexión exitosa a MongoDB")
+
+            # Enviar datos pendientes si existen
+            if os.path.getsize(ruta_update) > 0:
+                print("Enviando datos pendientes...")
+                pendientes = self.superInscrito.obtencion(ruta_update, Curso, Estudiante, Inscrito)
+                self.enviar_a_mongo(pendientes)
+
+            return db["Inscritos"]
+        except Exception as e:
+            print(f"Error de conexión: {str(e)}")
+            return None
 
     def recibir_inputs(self):
         d = {"curso": Curso, "estudiantes": Estudiante}  # Inicialmente asignas las clases
@@ -48,18 +73,38 @@ class InputInscrito:
         d["estudiantes"] = inter.empezarLaMatanga()
         return d
 
-    def agregar(self):
-        datos = self.recibir_inputs()
-        x = Inscrito(datos["curso"])
-        for estu in datos["estudiantes"]:
-            x.estudiantes.agregar_a_Lista(estu)
-        self.superInscrito.agregar_a_Lista(x)
-        if self.claseEnviada:
-            self.actualizar_json()
+    def enviar_a_mongo(self, lista_inscripciones):
+        if not lista_inscripciones:
+            return
+        try:
+            documentos = [insc.to_dict() for insc in lista_inscripciones]
+            self.coleccion.insert_many(documentos)
+            print(f"Enviados {len(documentos)} registros a MongoDB")
+
+            # Limpiar archivo temporal
+            with open(ruta_update, "w") as f:
+                json.dump([], f)
+        except Exception as e:
+            print(f"Error crítico al enviar: {str(e)}")
+
+    #arreglar con Conexion
+    def actualizar(self):
+        self.coleccion = self.coneccion_db()
+        if self.coleccion is not None:
+            # Cargar datos desde el archivo updateInscrito.json
+            lista_inscripciones = self.superInscrito.obtencion(ruta_update, Curso, Estudiante, Inscrito)
+
+            if lista_inscripciones:
+                self.enviar_a_mongo(lista_inscripciones)
+                self.superInscrito.depositar_datos(ruta_predeterInsc)
+            else:
+                print("No hay datos para actualizar")
+        else:
+            print("Falló la conexión a MongoDB. Guardando localmente...")
+            self.superInscrito.depositar_datos(ruta_predeterInsc)
+            self.superInscrito.depositar_datos(ruta_update)
 
 
-    def actualizar_json(self):
-        self.superInscrito.depositar_datos(ruta_predeterInsc)
         print("Se ha añadido el Inscrito")
         print("-------")
         print("")
@@ -89,7 +134,29 @@ class InputInscrito:
             print("ingrese un numero valido")
             return False
 
+    def agregar(self):
+        datos = self.recibir_inputs()
+        nueva_inscripcion = Inscrito(datos["curso"])
 
+        # Agregar estudiantes
+        for estu in datos["estudiantes"]:
+            nueva_inscripcion.estudiantes.agregar_a_Lista(estu)
+
+        # Guardar en JSON principal siempre
+        self.superInscrito.agregar_a_Lista(nueva_inscripcion)
+        self.superInscrito.depositar_datos(ruta_predeterInsc)
+        print(self.superInscrito)
+        # Manejo de conexión
+        if self.coleccion != []:
+            try:
+                self.coleccion.insert_one(nueva_inscripcion.to_dict())
+                print("Enviado a MongoDB inmediatamente")
+            except Exception as e:
+                print(f"Error al enviar: {str(e)}. Guardando en temporal...")
+                self.superInscrito.depositar_uno(ruta_update)
+        else:
+            print("Sin conexión. Guardando en temporal...")
+            self.superInscrito.depositar_uno(ruta_update)
 
     def editar(self):
         index = self.verificacion()
@@ -100,14 +167,14 @@ class InputInscrito:
                 x.estudiantes.agregar_a_Lista(estu)
             self.superInscrito.editar_a_Lista(index, x)
             if self.claseEnviada:
-                self.actualizar_json()
+                self.actualizar()
 
     def eliminar(self):
         index = self.verificacion()
         if index is not False:
             self.superInscrito.eliminar_a_Lista(index)
-            if self.claseEnviada:
-                self.actualizar_json()
+
+            self.actualizar()
 
     def ver(self):
         print(self.superInscrito)
@@ -143,11 +210,11 @@ class InputInscrito:
 if __name__ == "__main__":
     estudiante = Inscrito()
 
-    """x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
+    x = Curso("matematicas", 5, "A", "salon 17", "se ensenan formulas basicas")
     xa = Estudiante("pepo", 5, "871674998", "pepe123@gmail.com", "muerto")
 
     inscripcion1 = Inscrito(x)
-    inscripcion1.estudiantes.agregar_a_Lista(xa)"""
-    #inputs2 = InputEstudiante(estudiante)
+    inscripcion1.estudiantes.agregar_a_Lista(xa)
+    #inputs2 = InputEstudiante(inscripcion1)
     inputs2 = InputInscrito()
     inputs2.empezarLaMatanga()
