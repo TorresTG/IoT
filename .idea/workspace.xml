@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="Inscritos completo  falta hacer que los demas funcionen de la misma forma">
+    <list default="true" id="d7b59547-5f95-404f-b555-0382984dfd87" name="Changes" comment="Estudiantes conectados a BD hecho">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/InputInscrito.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UsersInteraction/InputMaestro.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersInteraction/inputCurso.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/inputCurso.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -240,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740158660335</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Estudiantes conectados a BD hecho">
+      <option name="closed" value="true" />
+      <created>1740164890896</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1740164890896</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,22 +276,7 @@
     <MESSAGE value="bonito y funcional" />
     <MESSAGE value="Funciona la parte que importa" />
     <MESSAGE value="Inscritos completo  falta hacer que los demas funcionen de la misma forma" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inscritos completo  falta hacer que los demas funcionen de la misma forma" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py</url>
-          <line>73</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/UsersInteraction/inputEstudiantes.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Estudiantes conectados a BD hecho" />
+    <option name="LAST_COMMIT_MESSAGE" value="Estudiantes conectados a BD hecho" />
   </component>
 </project>

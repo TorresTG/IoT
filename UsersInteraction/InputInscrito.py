@@ -18,7 +18,6 @@ class InputInscrito:
     def __init__(self, superInscrito=None):
         self.__ciclo = True
         self.claseEnviada = False
-        self.seteo_conexion = False
         self.superInscrito = Inscrito()
         self.internet = True
         self.estudiante = Estudiante()
@@ -42,7 +41,7 @@ class InputInscrito:
                 print("Enviando datos pendientes...")
                 pendientes = self.superInscrito.obtencion(ruta_update, Curso, Estudiante, Inscrito)
                 self.enviar_a_mongo(pendientes)
-                self.seteo_conexion = True
+                self.internet = True
         else:
             print("Aviso: Se ha omitido el guardado de la clase en la DB y el Local")
         print(self.superInscrito)
@@ -62,7 +61,7 @@ class InputInscrito:
             print("Conexión exitosa a MongoDB")
 
             # Enviar datos pendientes si existen
-            if os.path.getsize(ruta_update) > 0 and self.seteo_conexion is True:
+            if os.path.getsize(ruta_update) > 0 and self.internet is True:
                 print("Enviando datos pendientes...")
                 pendientes = self.superInscrito.obtencion(ruta_update, Curso, Estudiante, Inscrito)
                 self.enviar_a_mongo(pendientes)
@@ -93,6 +92,7 @@ class InputInscrito:
 
     def enviar_a_mongo(self, lista_inscripciones):
         if not lista_inscripciones:
+            print("no hay datos para enviar")
             return
         try:
             documentos = [insc.to_dict() for insc in lista_inscripciones]
@@ -155,17 +155,18 @@ class InputInscrito:
         for estu in datos["estudiantes"]:
             nueva_inscripcion.estudiantes.agregar_a_Lista(estu)
         self.superInscrito.agregar_a_Lista(nueva_inscripcion)
-        # Guardar en JSON principal siempre
+
         if not self.claseEnviada:
-            self.superInscrito.depositar_datos(ruta_predeterInsc)
-            print(self.superInscrito)
             self.coleccion = self.coneccion_db()
             if self.coleccion is not None:
+                self.actualizar()
                 self.coleccion.insert_one(nueva_inscripcion.to_dict())
                 print("Enviado a MongoDB correctamente")
             else:
                 print("Sin conexión. Guardando en temporal...")
                 self.superInscrito.depositar_uno(ruta_update)
+            self.superInscrito.depositar_datos(ruta_predeterInsc)
+            print(self.superInscrito)
         else:
             print("Aviso: Se ha omitido el guardado de la clase en la DB y el Local")
             print(self.superInscrito)
@@ -210,7 +211,7 @@ class InputInscrito:
             print(f"5). Salir de Inscritos")
             print(f"6). quitar internet (solo para pruebas)")
             print("")
-            print("")
+            print(self.internet)
             print("eliga el numero deseado")
             eleccion = input()
             if eleccion.isdigit():
@@ -231,7 +232,7 @@ class InputInscrito:
                 else:
                     self.internet = True
             else:
-                print("ingrese un numero dentro del rango de 1 - 5")
+                print("ingrese un numero dentro del rango de 1 - 6")
         print("se cerro el programa")
 
 

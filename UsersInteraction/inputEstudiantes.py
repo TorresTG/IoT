@@ -28,6 +28,7 @@ class InputEstudiante:
                 print("añadiendo Estudiante...")
                 self.superEstudiante.lista_clases = self.superEstudiante.obtencion(ruta_predeterEstu, None, Estudiante, None)
             else:
+                print("no se a encontrado ningun Estudiante por el momento y se encuentra vacio a la espera de datos")
                 self.superEstudiante.crear_json(ruta_predeterEstu, [])
         else:
             print("obteniendo datos de la clase mandada")
@@ -40,7 +41,9 @@ class InputEstudiante:
                 print("creando archivo temporal...")
                 self.superEstudiante.crear_json(ruta_update, [])
             self.coleccion = self.coneccion_db() #enviar datos de updatejson
-            if os.path.getsize(ruta_update) > 0:
+            with open(ruta_update, 'r') as f:
+                contenido_real = json.load(f)
+            if len(contenido_real) > 0:
                 print("Enviando datos pendientes...")
                 pendientes = self.superEstudiante.obtencion(ruta_update, None, Estudiante, None)
                 self.enviar_a_mongo(pendientes)
@@ -60,21 +63,16 @@ class InputEstudiante:
             MONGO_URI = "mongodb+srv://Mac-Tobi:04477369@myatlasclusteredu.qenui.mongodb.net/?authSource=admin"
             client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
             db = client["python"]
-            print("Conexión exitosa a MongoDB")
 
-            # Enviar datos pendientes si existen
-            if os.path.getsize(ruta_update) > 0 and self.seteo_conexion is True:
+            if self.seteo_conexion is True:
                 print("Enviando datos pendientes...")
                 pendientes = self.superEstudiante.obtencion(ruta_update, None, Estudiante, None)
                 self.enviar_a_mongo(pendientes)
+
             if not self.internet:
                 return None
             else:
                 return db["Estudiantes"]
-            #return None
-            #return db["Estudiantes"]
-
-
         except Exception as e:
             print(f"Error coneccion_db: {str(e)}")
             return None
@@ -82,15 +80,13 @@ class InputEstudiante:
     def enviar_a_mongo(self, lista_inscripciones):
         if lista_inscripciones == []:
             return
-        try:
-            documentos = [insc.to_dict() for insc in lista_inscripciones]
-            self.coleccion.insert_many(documentos)
-            print(f"Enviado {len(documentos)} registros a MongoDB")
+        documentos = [estu.to_dict() for estu in lista_inscripciones]
+        self.coleccion.insert_many(documentos)
+        print(f"Enviado {len(documentos)} registros a MongoDB")
 
-            with open(ruta_update, "w") as f:
-                json.dump([], f)
-        except Exception as e:
-            print(f"Error enviar_a_mongo: {str(e)}")
+        with open(ruta_update, "w") as f:
+            json.dump([], f)
+
 
 
     def recibir_inputs(self):
@@ -116,9 +112,7 @@ class InputEstudiante:
             self.superEstudiante.depositar_datos(ruta_predeterEstu)
             self.superEstudiante.depositar_datos(ruta_update)
 
-        print("Se ha añadido el Inscrito")
-        print("-------")
-        print("")
+
 
     def verificacion(self):
         print(f"\nÍndice del Estudiante a modificar (0/{len(self.superEstudiante.lista_clases) - 1}): ")
@@ -152,6 +146,7 @@ class InputEstudiante:
         if not self.claseEnviada:
             self.coleccion = self.coneccion_db()
             if self.coleccion is not None:
+                self.actualizar()
                 self.coleccion.insert_one(x.to_dict())
                 print("Enviado a MongoDB correctamente")
             else:
@@ -198,7 +193,7 @@ class InputEstudiante:
             print(f"5). Salir devuelta a Inscritos")
             print(f"6). quitar internet (solo para pruebas)")
             print("")
-            print("")
+            print(self.internet)
             print("eliga el numero deseado")
             eleccion = input()
             if eleccion.isdigit():
@@ -216,13 +211,15 @@ class InputEstudiante:
             elif eleccion == 6:
                 if self.internet:
                     self.internet = False
+                    self.coleccion = self.coneccion_db()
                 else:
                     self.internet = True
-                    self.coleccion = self.coneccion_db()
+
             else:
-                print("ingrese un numero dentro del rango de 1 - 5")
+                print("ingrese un numero dentro del rango de 1 - 6")
         print("se cerro el programa")
         r = self.superEstudiante.lista_clases
+        self.superEstudiante.lista_clases = []
         return r
 
 
@@ -236,6 +233,6 @@ if __name__ == "__main__":
                    "8716608698", "23170106@uttcampus.com", "Muerto")
     estudiante.agregar_a_Lista(x)
     estudiante.agregar_a_Lista(y)
-    inputs2 = InputEstudiante(estudiante)
-    #inputs2 = InputEstudiante()
+    #inputs2 = InputEstudiante(estudiante)
+    inputs2 = InputEstudiante()
     inputs2.empezarLaMatanga()
